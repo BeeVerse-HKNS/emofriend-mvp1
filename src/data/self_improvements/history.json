@@ -1,0 +1,26 @@
+[
+  {
+    "action": "test_action",
+    "outcome": "success",
+    "context": {
+      "task_type": "test"
+    },
+    "timestamp": "2026-05-09T20:16:47.325035"
+  },
+  {
+    "action": "test_action",
+    "outcome": "success",
+    "context": {
+      "task_type": "test"
+    },
+    "timestamp": "2026-05-09T20:16:47.325035"
+  },
+  {
+    "action": "test_action",
+    "outcome": "failure",
+    "context": {
+      "task_type": "test"
+    },
+    "timestamp": "2026-05-09T20:16:47.332887"
+  }
+]

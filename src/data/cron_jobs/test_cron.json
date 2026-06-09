@@ -1,0 +1,6 @@
+{
+  "id": "test_cron",
+  "schedule": "0 * * * *",
+  "description": "Test cron job",
+  "created_at": "2026-05-09T20:14:36.346674"
+}

@@ -1,0 +1,22 @@
+{
+  "task_id": "TEST-001",
+  "timestamp": "2026-05-13T20:12:58.498142",
+  "task_type": "demo",
+  "description": "測試 Self-Healing 功能",
+  "status": "completed",
+  "completed_steps": [
+    "步驟1: 初始化",
+    "步驟3: 完成"
+  ],
+  "failed_steps": [],
+  "errors": [],
+  "retry_count": 0,
+  "duration": "0s",
+  "patterns": [],
+  "lessons": [
+    "成功完成，但需要檢查係咪可以優化步驟"
+  ],
+  "recommendations": [
+    "任務成功，可以考慮自動化定時執行"
+  ]
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "risk_type": "trend_based",
+    "probability": 1.0,
+    "risk_level": "critical",
+    "timeframe": "next 1-3 steps",
+    "indicators": [
+      "error_rate increasing at 233.3%"
+    ],
+    "recommended_action": "Reduce error_rate or scale resources",
+    "confidence": 0.7
+  },
+  {
+    "risk_type": "threshold_based",
+    "probability": 0.75,
+    "risk_level": "medium",
+    "timeframe": "soon",
+    "indicators": [
+      "cpu=85.00 approaching threshold"
+    ],
+    "recommended_action": "Scale up or distribute load",
+    "confidence": 0.9
+  }
+]

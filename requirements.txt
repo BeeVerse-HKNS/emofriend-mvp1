@@ -1,0 +1,37 @@
+# Core
+streamlit>=1.30.0
+pandas>=2.0.0
+numpy>=1.24.0
+pytest>=7.0.0
+
+# AI/ML
+langchain>=0.3
+langchain-core>=0.3
+langgraph>=0.2
+chromadb>=0.5
+openai>=1.0
+anthropic>=0.40
+litellm>=1.0
+ollama>=0.4
+
+# Web
+fastapi>=0.100.0
+uvicorn>=0.20.0
+pydantic>=2.0
+
+# Data
+sqlalchemy>=2.0
+sqlite-utils>=3.36
+pyyaml>=6.0
+python-dateutil>=2.8
+
+# Utils
+structlog>=24.0
+rich>=13.0
+apscheduler>=3.10
+psutil>=5.9
+
+# Content
+google-api-python-client>=2.0
+google-auth-oauthlib>=1.0
+volcengine-python-sdk[ark]>=5.0

@@ -1,0 +1,10 @@
+{
+  "approval_id": "TEST-001_20260509193858",
+  "task_id": "TEST-001",
+  "operation": "git push origin main",
+  "context": {},
+  "requested_at": "2026-05-09T19:38:58.766451",
+  "status": "approved",
+  "user_response": null,
+  "responded_at": "2026-05-09T19:38:58.776503"
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "prompt_tokens": 1000,
+    "completion_tokens": 500,
+    "total_tokens": 1500,
+    "cost": 0.06,
+    "timestamp": "2026-05-09T20:09:52.943753"
+  },
+  {
+    "prompt_tokens": 2000,
+    "completion_tokens": 1000,
+    "total_tokens": 3000,
+    "cost": 0.12,
+    "timestamp": "2026-05-09T20:09:52.945774"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "gpt-4": [
+    {
+      "date": "2026-05-09",
+      "cost": 0.5,
+      "tokens": 1000,
+      "operation": "inference",
+      "timestamp": "2026-05-09T20:16:47.343119"
+    }
+  ]
+}

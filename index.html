@@ -1,330 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EmoPlay · EmoCare — AI + SEL for Children</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EmoPlay · EmoCare — AI + SEL Mental-Wellbeing Platform</title>
 <style>
   :root{
-    --brand:#196AA4; --honey:#AE844B; --deep:#0E2A3B; --cream:#F6F2EA;
-    --coral:#D9534F; --ink:#1A1A1A; --muted:#6C757D; --bluebg:#E3F0F7; --light:#F4F6F8;
+    --brand:#196AA4; --honey:#AE844B; --cream:#F6F2EA; --deep:#0E2A3B;
+    --coral:#D9534F; --light:#E3F0F7; --ink:#1A1A1A; --muted:#6C757D;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Segoe UI',Roboto,Helvetica,Arial,'Microsoft YaHei',sans-serif;color:var(--ink);line-height:1.5;background:#fff}
+  body{font-family:'Noto Sans',Segoe UI,system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.6}
+  h1,h2,h3,.display{font-family:'Oswald','Noto Sans',sans-serif}
   a{color:var(--brand);text-decoration:none}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
-  /* NAV */
-  nav{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);z-index:50;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
-  nav img{height:34px}
-  nav .links a{margin-left:18px;font-weight:600;font-size:14px;color:var(--deep)}
-  nav .links a:hover{color:var(--brand)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .btn{display:inline-block;background:var(--brand);color:#fff;padding:12px 22px;border-radius:8px;font-weight:700;font-family:'Oswald',sans-serif;letter-spacing:.3px}
+  .btn.honey{background:var(--honey)}
+  .btn:hover{opacity:.92}
   /* HERO */
-  .hero{position:relative;color:#fff;padding:90px 20px 70px;background:url('assets/hero.png') center/cover no-repeat;overflow:hidden}
-  .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(14,42,59,.88),rgba(25,106,164,.62));z-index:1}
-  .hero .wrap{position:relative;z-index:2}
-  .hero h1{font-size:46px;font-weight:800;letter-spacing:-.5px}
-  .hero h1 span{color:#F4C24A}
-  .hero p.sub{font-size:20px;margin-top:14px;max-width:640px;color:#eaf3fa}
+  .hero{position:relative;color:#fff;padding:90px 0 70px;background:linear-gradient(120deg,#0E2A3B 0%,#196AA4 70%,#2b86c4 100%)}
+  .hero .logo{position:absolute;top:22px;left:20px;width:120px;opacity:.95}
+  .hero h1{font-size:54px;line-height:1.05;margin-bottom:14px}
+  .hero .sub{font-size:22px;color:var(--honey);font-weight:600;margin-bottom:10px}
+  .hero p.lead{font-size:17px;max-width:680px;color:#dff;opacity:.95}
   .hero .cta{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:13px 26px;border-radius:30px;font-weight:700;font-size:15px}
-  .btn.primary{background:#F4C24A;color:var(--deep)}
-  .btn.ghost{border:2px solid #fff;color:#fff}
-  /* SECTION */
+  .pill{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:999px;font-size:13px;margin-top:18px;margin-right:8px}
+  /* SECTIONS */
   section{padding:64px 0}
-  section h2{font-size:32px;font-weight:800;color:var(--deep);margin-bottom:8px}
-  section .kick{color:var(--honey);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:13px}
-  .lead{max-width:760px;color:var(--muted);font-size:16px;margin-top:10px}
-  /* CRISIS BAND */
-  .crisis{background:var(--deep);color:#fff}
-  .crisis h2{color:#fff}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
-  .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px}
-  .stat .big{font-size:34px;font-weight:800;color:#F4C24A}
-  .stat .lab{font-size:12px;letter-spacing:1px;color:#9fc6e0;text-transform:uppercase}
-  .stat .txt{font-size:13px;color:#dfe9f0;margin-top:8px}
+  section.alt{background:var(--cream)}
+  h2{font-size:34px;color:var(--deep);margin-bottom:8px}
+  .kicker{color:var(--honey);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-size:13px;font-family:'Oswald',sans-serif}
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}
+  .stat{background:var(--brand);color:#fff;border-radius:12px;padding:20px 16px}
+  .stat.coral{background:var(--coral)} .stat.honey{background:var(--honey)} .stat.deep{background:var(--deep)}
+  .stat .n{font-size:34px;font-family:'Oswald',sans-serif;font-weight:700;line-height:1}
+  .stat .l{font-size:12px;text-transform:uppercase;letter-spacing:1px;opacity:.9}
+  .stat .d{font-size:12.5px;margin-top:8px;opacity:.92}
+  /* PAINPOINTS */
+  .pp{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:26px}
+  .card{border:1px solid #e3e8ee;border-radius:14px;padding:22px;background:#fff;box-shadow:0 4px 16px rgba(14,42,59,.05)}
+  .card h3{font-size:22px;color:var(--brand);margin-bottom:10px}
+  .steps{display:flex;gap:10px;margin-top:14px}
+  .step{flex:1;background:var(--light);border-radius:10px;padding:12px;text-align:center;font-size:13px}
+  .step b{display:block;color:var(--brand);font-family:'Oswald',sans-serif;font-size:15px;margin-bottom:4px}
+  .step.s2 b{color:var(--honey)} .step.s3 b{color:var(--coral)}
+  .imgrow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+  .imgrow img{width:100%;height:170px;object-fit:cover;border-radius:12px}
   /* TOOLS */
-  .tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:30px}
-  .tool{background:var(--light);border:1px solid #e7edf2;border-radius:18px;padding:26px;box-shadow:0 6px 24px rgba(14,42,59,.06)}
-  .tool h3{font-size:20px;color:var(--brand);margin-bottom:6px}
-  .tool .tag{display:inline-block;background:var(--honey);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:12px}
-  /* mood check-in */
-  .emoji-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
-  .emoji{font-size:30px;background:#fff;border:2px solid #e3e9ee;border-radius:12px;width:52px;height:52px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
-  .emoji:hover{border-color:var(--brand);transform:translateY(-2px)}
-  .emoji.sel{border-color:var(--brand);background:var(--bluebg)}
-  .signal{height:12px;background:#e9eef2;border-radius:8px;overflow:hidden;margin-top:8px}
-  .signal > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--coral),var(--honey),#5cb85c);transition:width .5s}
-  .reply{margin-top:12px;background:#fff;border-left:4px solid var(--brand);padding:12px 14px;border-radius:8px;font-size:14px;color:var(--deep);min-height:48px}
-  /* FACS gallery */
-  .facs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
-  .fac{background:#fff;border:1px solid #e7edf2;border-radius:10px;padding:10px 6px;text-align:center;font-size:11px;color:var(--deep)}
-  .fac b{display:block;font-size:20px;color:var(--brand)}
-  /* dashboard mock */
-  .dash{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-top:12px}
-  .card{background:#fff;border:1px solid #e7edf2;border-radius:12px;padding:14px}
-  .card h4{font-size:13px;color:var(--muted);margin-bottom:8px}
-  .radar-row{display:flex;align-items:center;gap:8px;font-size:12px;margin:6px 0;color:var(--deep)}
-  .radar-row .bar{flex:1;height:8px;background:#eef3f6;border-radius:6px;overflow:hidden}
-  .radar-row .bar > i{display:block;height:100%;background:var(--brand)}
-  /* heatmap */
-  .heat{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin-top:12px}
-  .cell{aspect-ratio:1;border-radius:5px;background:#cdeccd}
-  .cell.w1{background:#cdeccd}.cell.w2{background:#ffe9a8}.cell.w3{background:#ffc06b}.cell.w4{background:#ff8a5c}.cell.w5{background:#ff5d5d}
-  .legend{display:flex;gap:14px;margin-top:10px;font-size:12px;color:var(--muted)}
-  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:middle}
-  /* SCIENCE */
-  .sci{background:var(--bluebg)}
-  .sci-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:26px}
-  .sci-card{background:#fff;border-radius:14px;padding:18px;text-align:center;border-top:4px solid var(--brand)}
-  .sci-card .n{font-size:26px;font-weight:800;color:var(--brand)}
-  .sci-card h4{font-size:14px;margin:8px 0 6px;color:var(--deep)}
-  .sci-card p{font-size:12px;color:var(--muted)}
-  /* GZ */
-  .gz{background:var(--cream)}
-  .gz-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px;align-items:center}
-  .gz ul{list-style:none}
-  .gz li{padding:10px 0;border-bottom:1px dashed #d9c9a8;font-size:15px;color:var(--deep)}
-  .gz li:before{content:"▸ ";color:var(--honey);font-weight:800}
-  .pill{display:inline-block;background:var(--brand);color:#fff;font-weight:700;border-radius:20px;padding:6px 16px;font-size:13px;margin-top:10px}
-  /* TEAM */
-  .team{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-top:24px}
-  .team .bio{flex:1;min-width:280px}
-  .team h3{font-size:22px;color:var(--deep)}
-  .team .role{color:var(--honey);font-weight:700;margin:4px 0 12px}
-  .team ul{margin-left:18px;color:var(--muted);font-size:14px}
+  .tool{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:22px;margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+  .tool .demo{background:var(--light);border-radius:12px;padding:18px;min-height:180px}
+  .mood{display:flex;gap:8px;flex-wrap:wrap}
+  .mood span{font-size:26px;cursor:pointer;filter:grayscale(.6);transition:.2s}
+  .mood span.on{filter:none;transform:scale(1.15)}
+  .faces{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .faces div{background:#fff;border:1px solid #dde;border-radius:8px;padding:6px;text-align:center;font-size:11px}
+  .faces div b{display:block;font-size:20px}
+  .radar{width:160px;height:160px}
+  .heat{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}
+  .heat i{height:26px;border-radius:5px;display:block}
+  /* COMPANY */
+  .group{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px}
+  .ent{flex:1;min-width:240px;background:var(--deep);color:#fff;border-radius:14px;padding:20px}
+  .ent.hk{background:var(--brand)}
+  .ent h4{font-family:'Oswald',sans-serif;font-size:19px;margin-bottom:6px}
+  .chips{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+  .chip{background:#fff;border:1px solid #e3e8ee;border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;color:var(--brand)}
   /* FOOTER */
-  footer{background:var(--deep);color:#cfe0ec;padding:40px 0;font-size:14px}
-  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
-  footer a{color:#F4C24A}
-  footer h4{color:#fff;margin-bottom:10px}
-  .final-cta{text-align:center;background:linear-gradient(120deg,var(--brand),var(--deep));color:#fff;padding:60px 20px}
-  .final-cta h2{color:#fff;font-size:34px}
-  @media(max-width:820px){.stats,.tool-grid,.sci-grid,.gz-grid{grid-template-columns:1fr}.facs{grid-template-columns:repeat(3,1fr)}.heat{grid-template-columns:repeat(8,1fr)}.dash{grid-template-columns:1fr}}
+  footer{background:var(--deep);color:#cfe3f0;padding:40px 0;font-size:14px}
+  footer a{color:var(--honey)}
+  .src{font-size:12px;color:var(--muted);margin-top:18px}
 </style>
 </head>
 <body>
 
-<nav>
-  <img src="assets/logo.png" alt="BeeVerse">
-  <div class="links">
-    <a href="#tools">EmoPlay Tools</a>
-    <a href="#science">Science</a>
-    <a href="#guangzhou">Guangzhou</a>
-    <a href="#demo">Demo</a>
-  </div>
-</nav>
-
 <header class="hero">
+  <img class="logo" src="assets/logo.png" alt="BeeVerse"/>
   <div class="wrap">
-    <h1>EmoPlay <span>·</span> EmoCare</h1>
-    <p class="sub">AI + Social-Emotional-Learning platform for children &amp; teenagers (ages 4–18). Objective, early, privacy-first emotional signals — before a crisis escalates.</p>
+    <h1>EmoPlay · EmoCare</h1>
+    <div class="sub">AI + SEL Mental-Wellbeing Platform for Children &amp; Teenagers (Ages 4–18)</div>
+    <p class="lead">Objective, early, privacy-first emotional signals for every child — before a crisis escalates. Built for Guangzhou, Hong Kong &amp; Hangzhou: B2B schools &amp; universities, then B2C families.</p>
     <div class="cta">
-      <a class="btn primary" href="#tools">Explore the Tools</a>
-      <a class="btn ghost" href="#demo">Try the Live Demo</a>
+      <a class="btn" href="#tools">Explore the live tools ↓</a>
+      <a class="btn honey" href="https://static-zeta-one.vercel.app/emocare-platform" target="_blank" rel="noopener">Open live demo ↗</a>
+    </div>
+    <div>
+      <span class="pill">Entered by 广东丞锋人工智能有限公司 (Guangzhou Nansha)</span>
+      <span class="pill">BeeVerse Hong Kong · est. Aug 2025</span>
     </div>
   </div>
 </header>
 
 <!-- CRISIS -->
-<section class="crisis">
+<section>
   <div class="wrap">
-    <div class="kick">Why this matters</div>
-    <h2>The Crisis Is Measurable</h2>
-    <p class="lead" style="color:#cfe0ec">Child mental health is a ticking clock across Hong Kong and China. The data is not ambiguous.</p>
+    <div class="kicker">The Crisis</div>
+    <h2>Child mental health is a ticking clock</h2>
+    <p>Every year of delay is a generation of preventable suffering. SEN and high-risk children are identified only <b>after</b> a crisis escalates; schools cannot scale support (~1 social worker : 500+ students); the family–school data loop is broken.</p>
     <div class="stats">
-      <div class="stat"><div class="big">40%</div><div class="lab">China</div><div class="txt">Senior-high depression detection rate (Mental Health Blue Book 2023); 30% junior-high, 10% primary.</div></div>
-      <div class="stat"><div class="big">25.5%</div><div class="lab">Hong Kong</div><div class="txt">Secondary students with moderate–severe depression; 20.5% moderate–severe anxiety (2024 Well-Being Survey, n=1,646).</div></div>
-      <div class="stat"><div class="big">84,130</div><div class="lab">HK SEN</div><div class="txt">Students (10.7%) have special educational needs; 67,870 in mainstream schools (12.6%) — and rising &gt;30% in 5 yrs.</div></div>
-      <div class="stat"><div class="big">20%</div><div class="lab">Silent</div><div class="txt">Of HK teens would NOT seek help; only 28.5% will talk to an adult (YMCA 2024).</div></div>
+      <div class="stat coral"><div class="n">40%</div><div class="l">China senior-high</div><div class="d">depression detection rate (Blue Book 2023); 30% junior-high, 10% primary</div></div>
+      <div class="stat"><div class="n">25.5%</div><div class="l">Hong Kong</div><div class="d">secondary students moderate–severe depression; 20.5% anxiety (2024)</div></div>
+      <div class="stat honey"><div class="n">84,130</div><div class="l">HK SEN</div><div class="d">students (10.7%); 67,870 in mainstream (12.6%)</div></div>
+      <div class="stat deep"><div class="n">20%</div><div class="l">Silent</div><div class="d">of HK teens would NOT seek help; only 28.5% talk to an adult (YMCA 2024)</div></div>
     </div>
   </div>
 </section>
 
-<!-- TOOLS -->
+<!-- PAINPOINTS + NARROW/DETECT/SOLVE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="kicker">The Problem → Our Method</div>
+    <h2>Three gaps. One closed loop.</h2>
+    <p>For every painpoint, EmoPlay follows a simple, defensible method: <b>Narrow</b> the signal → <b>Detect</b> risk early → <b>Solve</b> inside the golden window.</p>
+    <div class="pp">
+      <div class="card">
+        <h3>1 · Invisible Emotions</h3>
+        <p>Teachers &amp; parents lack real-time, objective emotional signals. By the time a child is flagged, the crisis has already escalated.</p>
+        <div class="steps">
+          <div class="step s1"><b>Narrow</b>Daily 60-sec check-in + 25 FACS games flag the first deviation.</div>
+          <div class="step s2"><b>Detect</b>2,082-term NLP scores risk vs. age-normed baseline.</div>
+          <div class="step s3"><b>Solve</b>Child vault + CASEL radar alerts parent/teacher early.</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>2 · SEL Shortage + Unsafe AI</h3>
+        <p>One counsellor can't cover 500+ students. Generic AI chatbots have no CASEL framework, no escalation — the unsafe "tree hole".</p>
+        <div class="steps">
+          <div class="step s1"><b>Narrow</b>Game-based CASEL 5×17 + LEGO® Serious Play® reach every child.</div>
+          <div class="step s2"><b>Detect</b>Safe AI 'Bee' with hard guardrails flags risk, never encourages harm.</div>
+          <div class="step s3"><b>Solve</b>Teacher heatmap + human escalation — always in the loop.</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>3 · Broken Family–School Loop</h3>
+        <p>Parents see tantrums at home; teachers see withdrawal in class; clinicians see a crisis months later. Golden windows are missed.</p>
+        <div class="steps">
+          <div class="step s1"><b>Narrow</b>One child-owned vault shares 30-day curves + CASEL radar.</div>
+          <div class="step s2"><b>Detect</b>Home &amp; school read the same early signal.</div>
+          <div class="step s3"><b>Solve</b>Both act on one story, inside the GZ 'Screen-Alert-Intervene' loop.</div>
+        </div>
+      </div>
+    </div>
+    <div class="imgrow">
+      <img src="assets/child.png" alt="A thoughtful child"/>
+      <img src="assets/classroom.png" alt="Inclusive classroom"/>
+      <img src="assets/teacher.png" alt="Teacher and student"/>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PRODUCT: TOOLS -->
 <section id="tools">
   <div class="wrap">
-    <div class="kick">EmoPlay Tools</div>
-    <h2>Four Tools, One Closed Loop</h2>
-    <p class="lead">Interactive previews of the product. These run on-device — no raw video or audio ever leaves the child's phone.</p>
+    <div class="kicker">Our Product · Live Platform</div>
+    <h2>EmoPlay Tools — working, not slideware</h2>
+    <p>A 466 KB zero-dependency SPA, edge-deployed and offline-capable. Try the interactive demos below.</p>
 
-    <div class="tool-grid">
-      <!-- Tool 1 -->
-      <div class="tool">
-        <span class="tag">Tool 1 · Child</span>
-        <h3>Mood Check-in</h3>
-        <p style="font-size:13px;color:var(--muted)">A 60-second daily check-in that feels like a game. Tap how you feel:</p>
-        <div class="emoji-row" id="emojiRow">
-          <div class="emoji" data-v="20" data-m="I'm really struggling today.">😣</div>
-          <div class="emoji" data-v="45" data-m="I feel a bit down.">😕</div>
-          <div class="emoji" data-v="65" data-m="I'm okay, somewhere in the middle.">😐</div>
-          <div class="emoji" data-v="85" data-m="I'm doing pretty well!">🙂</div>
-          <div class="emoji" data-v="98" data-m="I feel great today!">😄</div>
-        </div>
-        <div class="signal"><i id="sigBar"></i></div>
-        <div class="reply" id="reply">Pick an emoji to see your daily emotional signal.</div>
-      </div>
-
-      <!-- Tool 2 -->
-      <div class="tool">
-        <span class="tag">Tool 2 · Science</span>
-        <h3>Micro-Expression Gallery</h3>
-        <p style="font-size:13px;color:var(--muted)">25 FACS micro-expressions the engine reads in daily play:</p>
-        <div class="facs" id="facs"></div>
-      </div>
-
-      <!-- Tool 3 -->
-      <div class="tool">
-        <span class="tag">Tool 3 · Parent</span>
-        <h3>Parent Dashboard Preview</h3>
-        <div class="dash">
-          <div class="card">
-            <h4>30-day emotional signal</h4>
-            <svg viewBox="0 0 240 70" width="100%" height="64"><polyline points="0,52 30,48 60,55 90,40 120,44 150,30 180,34 210,22 240,18" fill="none" stroke="#196AA4" stroke-width="3"/><polyline points="0,60 30,58 60,60 90,52 120,54 150,46 180,48 210,42 240,40" fill="none" stroke="#AE844B" stroke-width="2" stroke-dasharray="4"/></svg>
-            <div style="font-size:12px;color:var(--muted);margin-top:6px">Trend: gentle improvement · needs a warm check-in today.</div>
-          </div>
-          <div class="card">
-            <h4>CASEL 5 skill radar</h4>
-            <div class="radar-row">Self-awareness <div class="bar"><i style="width:78%"></i></div></div>
-            <div class="radar-row">Self-management <div class="bar"><i style="width:64%"></i></div></div>
-            <div class="radar-row">Social awareness <div class="bar"><i style="width:82%"></i></div></div>
-            <div class="radar-row">Relationships <div class="bar"><i style="width:70%"></i></div></div>
-            <div class="radar-row">Responsible decisions <div class="bar"><i style="width:58%"></i></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tool 4 -->
-      <div class="tool">
-        <span class="tag">Tool 4 · Teacher</span>
-        <h3>Classroom Heatmap</h3>
-        <p style="font-size:13px;color:var(--muted)">Cohort screening at a glance — who needs attention this week:</p>
-        <div class="heat" id="heat"></div>
-        <div class="legend">
-          <span><i style="background:#cdeccd"></i>Calm</span>
-          <span><i style="background:#ffe9a8"></i>Watch</span>
-          <span><i style="background:#ffc06b"></i>Mild</span>
-          <span><i style="background:#ff8a5c"></i>Risk</span>
-          <span><i style="background:#ff5d5d"></i>Alert</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SCIENCE -->
-<section class="sci" id="science">
-  <div class="wrap">
-    <div class="kick">Technology</div>
-    <h2>Five Evidence-Based Frameworks, One Engine</h2>
-    <div class="sci-grid">
-      <div class="sci-card"><div class="n">25</div><h4>FACS</h4><p>Objective facial micro-expression coding.</p></div>
-      <div class="sci-card"><div class="n">2,082</div><h4>NLP terms</h4><p>Multilingual emotional dictionary (Cantonese/Mandarin/English).</p></div>
-      <div class="sci-card"><div class="n">5×17</div><h4>CASEL</h4><p>SEL skills taught &amp; measured.</p></div>
-      <div class="sci-card"><div class="n">7</div><h4>Panksepp</h4><p>Affective-neuroscience engagement design.</p></div>
-      <div class="sci-card"><div class="n">®</div><h4>LEGO® Serious Play®</h4><p>Reflective facilitation (certified).</p></div>
-    </div>
-    <p class="lead" style="margin-top:24px">All five fuse into a single edge-inference engine: a child plays, the engine codes emotion, maps it to a CASEL skill, and routes the next activity — no clinician required for daily use.</p>
-  </div>
-</section>
-
-<!-- GUANGZHOU -->
-<section class="gz" id="guangzhou">
-  <div class="wrap">
-    <div class="kick">Guangzhou Industrialisation · 25% weight</div>
-    <h2>A First-in-Nation Law Created the Market</h2>
-    <div class="gz-grid">
+    <div class="tool">
       <div>
-        <p class="lead">Guangzhou's <b>Regulations on the Promotion of Mental Health for Primary &amp; Secondary Students</b> took effect 1 Nov 2024 — China's first local mental-health law (7 chapters, 35 articles). It mandates what EmoCare delivers.</p>
-        <span class="pill">3,806 schools · 2.93M students</span>
+        <h3>Mood Check-in</h3>
+        <p>60-second daily emotional signal — feels like a game, not a test. Tap how you feel; the engine codes it privately on-device.</p>
       </div>
-      <ul>
-        <li>≥1 mental-health class per 2 weeks per class</li>
-        <li>24-hour city-wide student psychological hotline</li>
-        <li>Annual universal screening (P4+) + one-file-per-student archive</li>
-        <li>Schools may ban smartphones on campus</li>
-        <li>2024 autumn: city-wide "All-staff Mentor System" (1 teacher ≈ 15 students)</li>
-        <li>"Screen → Alert → Intervene" closed loop</li>
-      </ul>
+      <div class="demo">
+        <div class="mood" id="mood">
+          <span onclick="pick(this)">😄</span><span onclick="pick(this)">🙂</span><span onclick="pick(this)">😐</span><span onclick="pick(this)">😟</span><span onclick="pick(this)">😢</span><span onclick="pick(this)">😡</span>
+        </div>
+        <p id="moodout" style="margin-top:10px;font-size:13px;color:var(--brand)">Tap an emoji to log today's check-in.</p>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div>
+        <h3>25-FACS Micro-Expression Gallery</h3>
+        <p>Objective facial emotion coding — the "what" a child feels, taught through playful camera games. A sample of the coded set:</p>
+      </div>
+      <div class="demo">
+        <div class="faces">
+          <div><b>😊</b>Happiness</div><div><b>😢</b>Sadness</div><div><b>😠</b>Anger</div>
+          <div><b>😨</b>Fear</div><div><b>😲</b>Surprise</div><div><b>🤢</b>Disgust</div>
+          <div><b>🙄</b>Contempt</div><div><b>😳</b>Embarrass</div><div><b>😔</b>Anguish</div>
+          <div><b>🤔</b>Thoughtful</div><div><b>😌</b>Content</div><div><b>😴</b>Tired</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div>
+        <h3>Parent Dashboard</h3>
+        <p>One-screen daily signal — calm / watch / alert, never a clinical label. Trend curves over 30/90 days; escalation path with local hotline.</p>
+      </div>
+      <div class="demo">
+        <svg class="radar" viewBox="0 0 100 100">
+          <polygon points="50,50 50,12 86,32 78,72 22,72 14,32" fill="none" stroke="#196AA4" stroke-width="1.5"/>
+          <polygon points="50,50 50,30 70,40 64,62 36,62 30,40" fill="#AE844B" fill-opacity="0.5"/>
+          <text x="50" y="9" font-size="7" text-anchor="middle" fill="#0E2A3B">Self-aware</text>
+          <text x="90" y="34" font-size="7" fill="#0E2A3B">Social</text>
+          <text x="82" y="76" font-size="7" fill="#0E2A3B">Relation</text>
+          <text x="18" y="76" font-size="7" fill="#0E2A3B">Decision</text>
+          <text x="6" y="34" font-size="7" fill="#0E2A3B">Manage</text>
+        </svg>
+        <p style="font-size:12px;color:var(--muted)">CASEL 5×17 radar from the child's growth vault.</p>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div>
+        <h3>Classroom Heatmap</h3>
+        <p>Cohort screening at a glance — which classes need attention this week. Maps to Guangzhou's 'Screen → Alert → Intervene' loop.</p>
+      </div>
+      <div class="demo">
+        <div class="heat" id="heat"></div>
+        <p style="font-size:11px;color:var(--muted);margin-top:6px">Green = calm · Amber = watch · Red = alert (auto-flagged)</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- TEAM -->
-<section id="team">
+<!-- TECH -->
+<section class="alt">
   <div class="wrap">
-    <div class="kick">Team</div>
-    <h2>Operator-Led, Advisor-Backed</h2>
-    <div class="team">
-      <img src="assets/child.png" alt="child" style="width:200px;border-radius:16px;box-shadow:0 8px 24px rgba(14,42,59,.12)">
-      <div class="bio">
-        <h3>Kwan Chi Ho, Jonathan (关智豪)</h3>
-        <div class="role">Founder &amp; CEO — BeeVerse / EmoPlay</div>
-        <ul>
-          <li>20+ yrs ops excellence (Sun Life Director, Chubb Head of Consumer Ops, HSBC).</li>
-          <li>Led HK$4.9B / 4.7M-member eMPF platform migration; managed HK$250M+ premium.</li>
-          <li>GYB Entrepreneurship &amp; SIYB cert (Guangzhou Nansha HRSS); partner: Guangzhou Yuyi Technology.</li>
-          <li>Certified LEGO® Serious Play® facilitator; MBA (Distinction), HKU.</li>
-        </ul>
-        <p style="margin-top:10px;font-size:13px;color:var(--muted)">Advisors: clinical psychologist · affective-computing PhD · former EDB principal · PCPD-aligned DPO.</p>
-      </div>
+    <div class="kicker">Technology</div>
+    <h2>Five evidence-based frameworks, one engine</h2>
+    <div class="pp">
+      <div class="card"><h3>25 FACS micro-expressions</h3><p>Objective facial emotion coding — the "what" a child feels.</p></div>
+      <div class="card"><h3>2,082-term NLP dictionary</h3><p>Multilingual sentiment — Cantonese + Mandarin + English.</p></div>
+      <div class="card"><h3>CASEL 5×17</h3><p>SEL skill framework we teach &amp; measure (5 competencies × 17 sub-skills).</p></div>
+      <div class="card"><h3>Panksepp 7 systems</h3><p>Affective-neuroscience basis for engagement &amp; reward.</p></div>
     </div>
+    <p style="margin-top:18px"><b>Moat:</b> edge/on-device inference (466 KB, no raw data leaves device) · longitudinal normed curves (ages 4–22) · China+HK bilingual models · regulation-ready workflow built around Guangzhou's mandated loop.</p>
   </div>
 </section>
 
-<!-- FINAL CTA / DEMO -->
-<section class="final-cta" id="demo">
+<!-- COMPANY / GROUP -->
+<section>
   <div class="wrap">
-    <h2>See EmoPlay in Action</h2>
-    <p style="max-width:620px;margin:14px auto;color:#dce9f2">The full EmoCare app demo runs live. Try it, then come back and explore the tools above.</p>
-    <div class="cta" style="justify-content:center">
-      <a class="btn primary" href="emocare-app.html">Launch Full EmoCare App →</a>
-      <a class="btn ghost" href="https://static-zeta-one.vercel.app/emocare-platform">Vercel Demo</a>
+    <div class="kicker">Company &amp; Group</div>
+    <h2>Guangzhou entity × Hong Kong network</h2>
+    <p>A first-in-nation law created the market; we own the tool. The group is structured for cross-border GBA execution.</p>
+    <div class="group">
+      <div class="ent">
+        <h4>广东丞锋人工智能有限公司</h4>
+        <p>Operating entity · Guangzhou Nansha. Registered to capture GBA policy support, Nansha entity incentives, and the 3,806-school / 2.93M-student mandated buyer.</p>
+      </div>
+      <div class="ent hk">
+        <h4>BeeVerse Hong Kong</h4>
+        <p>Established August 2025 — holding &amp; business development. Founder Kwan Chi Ho, Jonathan (关智豪) brings 20+ yrs operations-excellence across Sun Life, Chubb &amp; HSBC.</p>
+      </div>
     </div>
-    <p style="margin-top:18px;font-size:13px;color:#9fc6e0">Contact: jonathan.kwan@beeverse.io · BeeVerse Consulting · Guangzhou × Hong Kong</p>
+    <div class="chips">
+      <span class="chip">Chubb Insurance</span>
+      <span class="chip">Bowtie Insurance</span>
+      <span class="chip">Sun Life</span>
+      <span class="chip">Preface AI</span>
+      <span class="chip">Guangzhou Yuyi Technology</span>
+      <span class="chip">Huaiyan (CityGuard)</span>
+    </div>
+    <p style="margin-top:16px;font-size:14px;color:var(--muted)">Insurer partnerships turn wellness engagement into policy cross-sell — a revenue line competitors can't copy.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="alt" style="text-align:center">
+  <div class="wrap">
+    <h2>See EmoPlay live</h2>
+    <p style="margin:10px 0 22px">The platform above is deployed and working — open it on any device.</p>
+    <a class="btn" href="https://static-zeta-one.vercel.app/emocare-platform" target="_blank" rel="noopener">Vercel demo ↗</a>
+    <a class="btn honey" href="https://beeverse-hkns.github.io/emofriend-mvp1/" target="_blank" rel="noopener">GitHub Pages demo ↗</a>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div>
-      <img src="assets/logo.png" alt="BeeVerse" style="height:30px;margin-bottom:10px"><br>
-      EmoPlay · EmoCare — AI + SEL for Children. A BeeVerse product.
-    </div>
-    <div>
-      <h4>Competition</h4>
-      2026 Guangzhou Sci-Tech Innovation Competition (Global Division) · HKUST One Million Dollar Entrepreneurship Competition (Guangzhou)
-    </div>
-    <div>
-      <h4>Resources</h4>
-      <a href="emocare-app.html">EmoCare App</a><br>
-      <a href="https://beeverse-hkns.github.io/emofriend-mvp1/">GitHub Pages Demo</a>
-    </div>
+    <div><b>EmoPlay · EmoCare</b> — a BeeVerse product · 广东丞锋人工智能有限公司 (Guangzhou) × BeeVerse Hong Kong (2025)</div>
+    <div style="margin-top:6px">Entered in the 2026 Guangzhou Sci-Tech Innovation Competition (Global Division) · HKUST One Million Dollar Entrepreneurship Competition (Guangzhou)</div>
+    <div class="src">Sources: HK Baptist Oi Kwan 2024 Well-Being Survey (n=1,646); YMCA 2024; EDB 2024/25; China Mental Health Blue Book 2023; Guangzhou Regulations on Student Mental Health (effective 2024-11-01). Financials are forward-looking projections.</div>
   </div>
 </footer>
 
 <script>
-  // Tool 1: mood check-in
-  const row = document.getElementById('emojiRow');
-  const bar = document.getElementById('sigBar');
-  const reply = document.getElementById('reply');
-  row.querySelectorAll('.emoji').forEach(e=>{
-    e.addEventListener('click',()=>{
-      row.querySelectorAll('.emoji').forEach(x=>x.classList.remove('sel'));
-      e.classList.add('sel');
-      bar.style.width = e.dataset.v + '%';
-      reply.textContent = e.dataset.m + ' EmoCare suggests a 2-minute breathing game and a kind message home.';
-    });
-  });
-  // Tool 2: FACS gallery
-  const facs = ['Joy','Sadness','Anger','Fear','Surprise','Disgust','Contempt','Trust','Anticipation',
-    'Interest','Calm','Shame','Guilt','Pride','Embarrass','Confusion','Boredom','Determination',
-    'Tired','Pain','Worry','Hope','Love','Relief','Neutral'];
-  const fg = document.getElementById('facs');
-  facs.forEach((f,i)=>{const d=document.createElement('div');d.className='fac';d.innerHTML='<b>'+(i+1)+'</b>'+f;fg.appendChild(d);});
-  // Tool 4: heatmap
-  const heat=document.getElementById('heat');
-  const weights=[1,1,2,1,1,3,1,1,2,1,1,1,4,1,1,2,1,1,1,3,1,1,2,1,1,1,5,1,1,2,1,1,1,1,3,1];
-  weights.forEach(w=>{const c=document.createElement('div');c.className='cell w'+w;heat.appendChild(c);});
+  function pick(el){
+    document.querySelectorAll('#mood span').forEach(s=>s.classList.remove('on'));
+    el.classList.add('on');
+    var map={ '😄':'Great — keep the streak!','🙂':'Good day','😐':'Neutral','😟':'A bit low — try a 2-min check-in','😢':'Sad — we’ll suggest a calming activity','😡':'Angry — breathing exercise queued'};
+    document.getElementById('moodout').textContent = map[el.textContent] || 'Logged.';
+  }
+  // build heatmap
+  (function(){
+    var heat=document.getElementById('heat'); if(!heat) return;
+    var cols=['#2e8b57','#e0a800','#c0392b'];
+    for(var i=0;i<24;i++){
+      var r=Math.random();
+      var c = r>0.8?2 : r>0.55?1:0;
+      var i2=document.createElement('i');
+      i2.style.background=cols[c];
+      heat.appendChild(i2);
+    }
+  })();
 </script>
 </body>
 </html>

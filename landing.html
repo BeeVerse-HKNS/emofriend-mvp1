@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<title>EmoPlay · EmoCare — AI + SEL Mental-Wellbeing Platform (EN / 繁中 / 简体)</title>
+<style>
+  :root{
+    --brand:#196AA4; --honey:#AE844B; --cream:#F6F2EA; --deep:#0E2A3B;
+    --coral:#D9534F; --light:#E3F0F7; --ink:#1A1A1A; --muted:#6C757D; --green:#4C9B6D; --amber:#E0A800; --red:#C84642;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Noto Sans',Segoe UI,system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.65}
+  h1,h2,h3,.display{font-family:'Oswald','Noto Sans',sans-serif}
+  a{color:var(--brand);text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  .btn{display:inline-block;background:var(--brand);color:#fff;padding:12px 22px;border-radius:8px;font-weight:700;font-family:'Oswald',sans-serif;letter-spacing:.3px;cursor:pointer;border:none}
+  .btn.honey{background:var(--honey)}
+  .btn:hover{opacity:.92}
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;background:var(--deep);color:#fff;display:flex;align-items:center;gap:14px;padding:10px 20px;flex-wrap:wrap}
+  .nav .logo{font-family:'Oswald',sans-serif;font-weight:700;font-size:20px;color:#fff;display:flex;align-items:center;gap:8px}
+  .nav .logo b{color:var(--honey)}
+  .nav .links{display:flex;gap:14px;flex:1;flex-wrap:wrap}
+  .nav .links a{color:#cfe3f0;font-size:13.5px;font-weight:600}
+  .nav .links a:hover{color:#fff}
+  .lang{display:flex;gap:4px;background:rgba(255,255,255,.1);border-radius:999px;padding:3px}
+  .lang button{border:none;background:transparent;color:#cfe3f0;font-weight:700;font-size:12px;padding:6px 11px;border-radius:999px;cursor:pointer;font-family:'Oswald',sans-serif}
+  .lang button.on{background:var(--honey);color:#fff}
+  /* HERO */
+  .hero{position:relative;color:#fff;padding:90px 0 70px;background:linear-gradient(120deg,#0E2A3B 0%,#196AA4 70%,#2b86c4 100%)}
+  .hero .logo{position:absolute;top:22px;left:20px;width:120px;opacity:.95}
+  .hero h1{font-size:54px;line-height:1.05;margin-bottom:14px}
+  .hero .sub{font-size:22px;color:var(--honey);font-weight:600;margin-bottom:10px}
+  .hero p.lead{font-size:17px;max-width:700px;color:#dff;opacity:.95}
+  .hero .cta{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap}
+  .pill{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:999px;font-size:13px;margin-top:18px;margin-right:8px}
+  /* SECTIONS */
+  section{padding:64px 0}
+  section.alt{background:var(--cream)}
+  h2{font-size:34px;color:var(--deep);margin-bottom:8px}
+  .kicker{color:var(--honey);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-size:13px;font-family:'Oswald',sans-serif}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}
+  .stat{background:var(--brand);color:#fff;border-radius:12px;padding:20px 16px}
+  .stat.coral{background:var(--coral)} .stat.honey{background:var(--honey)} .stat.deep{background:var(--deep)}
+  .stat .n{font-size:34px;font-family:'Oswald',sans-serif;font-weight:700;line-height:1}
+  .stat .l{font-size:12px;text-transform:uppercase;letter-spacing:1px;opacity:.9}
+  .stat .d{font-size:12.5px;margin-top:8px;opacity:.92}
+  .pp{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-top:26px}
+  .card{border:1px solid #e3e8ee;border-radius:14px;padding:22px;background:#fff;box-shadow:0 4px 16px rgba(14,42,59,.05)}
+  .card h3{font-size:20px;color:var(--brand);margin-bottom:10px}
+  .steps{display:flex;gap:10px;margin-top:14px}
+  .step{flex:1;background:var(--light);border-radius:10px;padding:12px;text-align:center;font-size:13px}
+  .step b{display:block;color:var(--brand);font-family:'Oswald',sans-serif;font-size:15px;margin-bottom:4px}
+  .step.s2 b{color:var(--honey)} .step.s3 b{color:var(--coral)}
+  .imgrow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+  .imgrow img{width:100%;height:170px;object-fit:cover;border-radius:12px}
+  /* TOOLS */
+  .tool{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:22px;margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+  .tool .demo{background:var(--light);border-radius:12px;padding:18px;min-height:180px}
+  .mood{display:flex;gap:8px;flex-wrap:wrap}
+  .mood span{font-size:26px;cursor:pointer;filter:grayscale(.6);transition:.2s}
+  .mood span.on{filter:none;transform:scale(1.15)}
+  .faces{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .faces div{background:#fff;border:1px solid #dde;border-radius:8px;padding:6px;text-align:center;font-size:11px}
+  .faces div b{display:block;font-size:20px}
+  .radar{width:160px;height:160px}
+  .heat{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:8px}
+  .heat i{height:26px;border-radius:5px;display:block}
+  /* ENGINE */
+  .arch{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+  .arch .node{background:#fff;border:1px solid #e3e8ee;border-radius:12px;padding:16px;text-align:center}
+  .arch .node .ic{font-size:30px}
+  .arch .node b{display:block;color:var(--brand);margin-top:6px;font-family:'Oswald',sans-serif}
+  .arch .arrow{text-align:center;color:var(--honey);font-size:22px;align-self:center}
+  .enginebox{background:var(--deep);color:#fff;border-radius:14px;padding:24px;margin-top:22px}
+  .enginebox h3{color:var(--honey)}
+  .enginebox code{background:rgba(255,255,255,.12);padding:2px 6px;border-radius:6px}
+  textarea{width:100%;border:1px solid #cfd8e0;border-radius:10px;padding:12px;font-family:'Noto Sans',sans-serif;font-size:14px;resize:vertical}
+  .result{margin-top:14px;padding:16px;border-radius:10px;font-size:14px;display:none}
+  /* PRIVACY */
+  .priv{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  .priv .item{background:#fff;border:1px solid #e3e8ee;border-left:5px solid var(--brand);border-radius:10px;padding:16px}
+  .priv .item h4{color:var(--brand);font-size:17px;margin-bottom:6px}
+  /* COMPANY */
+  .group{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px}
+  .ent{flex:1;min-width:240px;background:var(--deep);color:#fff;border-radius:14px;padding:20px}
+  .ent.hk{background:var(--brand)}
+  .ent h4{font-family:'Oswald',sans-serif;font-size:19px;margin-bottom:6px}
+  .chips{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+  .chip{background:#fff;border:1px solid #e3e8ee;border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;color:var(--brand)}
+  /* CRITERIA */
+  .crit{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  .crit .w{background:#fff;border:1px solid #e3e8ee;border-radius:12px;padding:18px}
+  .crit .w .bar{height:10px;background:var(--light);border-radius:6px;margin:8px 0;overflow:hidden}
+  .crit .w .bar i{display:block;height:100%;background:var(--brand)}
+  .crit .w b{color:var(--deep)}
+  .crit .w .align{font-size:13px;color:var(--muted);margin-top:6px}
+  /* FOOTER */
+  footer{background:var(--deep);color:#cfe3f0;padding:40px 0;font-size:14px}
+  footer a{color:var(--honey)}
+  .src{font-size:12px;color:var(--muted);margin-top:18px}
+  .demos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:28px}
+  .demos .card img{max-width:100%;height:340px;object-fit:contain;border-radius:12px;border:1px solid #e3e8ee}
+  @media(max-width:820px){
+    .stats,.pp,.arch,.priv,.crit{grid-template-columns:1fr}
+    .tool,.imgrow{grid-template-columns:1fr}
+    .hero h1{font-size:38px}
+    .nav .links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo">Emo<b>Play</b></div>
+  <div class="links">
+    <a href="#crisis" data-i18n="nav_crisis">Crisis</a>
+    <a href="#method" data-i18n="nav_method">Method</a>
+    <a href="#product" data-i18n="nav_product">Product</a>
+    <a href="#play" data-i18n="nav_play">Play</a>
+    <a href="#engine" data-i18n="nav_engine">Engine</a>
+    <a href="#privacy" data-i18n="nav_privacy">Safety</a>
+    <a href="#company" data-i18n="nav_company">Company</a>
+    <a href="#criteria" data-i18n="nav_criteria">Criteria</a>
+    <a href="#demo" data-i18n="nav_demo">Demo</a>
+  </div>
+  <div class="lang">
+    <button data-lang="en" class="on">EN</button>
+    <button data-lang="zhHant">繁中</button>
+    <button data-lang="zhHans">简体</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <img class="logo" src="assets/logo.png" alt="BeeVerse"/>
+  <div class="wrap">
+    <h1 data-i18n="hero_title">EmoPlay · EmoCare</h1>
+    <div class="sub" data-i18n="hero_sub">AI + SEL Mental-Wellbeing Platform for Children &amp; Teenagers (Ages 4–18)</div>
+    <p class="lead" data-i18n="hero_lead">Objective, early, privacy-first emotional signals for every child — before a crisis escalates. Built for Guangzhou, Hong Kong &amp; Hangzhou: B2B schools &amp; universities, then B2C families. Available in English, Traditional Chinese and Simplified Chinese.</p>
+    <div class="cta">
+      <a class="btn" href="#product" data-i18n="hero_cta1">Explore the live tools ↓</a>
+      <a class="btn honey" href="https://beeverse-hkns.github.io/emofriend-mvp1/" target="_blank" rel="noopener" data-i18n="hero_cta2">Open live demo ↗</a>
+    </div>
+    <div>
+      <span class="pill" data-i18n="hero_pill1">Entered by 广东丞锋人工智能有限公司 (Guangzhou Nansha)</span>
+      <span class="pill" data-i18n="hero_pill2">BeeVerse Hong Kong · est. Aug 2025</span>
+    </div>
+  </div>
+</header>
+
+<!-- CRISIS -->
+<section id="crisis">
+  <div class="wrap">
+    <div class="kicker" data-i18n="crisis_kicker">The Crisis</div>
+    <h2 data-i18n="crisis_title">Child mental health is a ticking clock</h2>
+    <p data-i18n="crisis_lead">Every year of delay is a generation of preventable suffering. SEN and high-risk children are identified only <b>after</b> a crisis escalates; schools cannot scale support (~1 social worker : 500+ students); the family–school data loop is broken.</p>
+    <div class="stats">
+      <div class="stat coral"><div class="n">40%</div><div class="l" data-i18n="c_china_l">China senior-high</div><div class="d" data-i18n="c_china_d">depression detection rate (Blue Book 2023); 30% junior-high, 10% primary</div></div>
+      <div class="stat"><div class="n">25.5%</div><div class="l" data-i18n="c_hk_l">Hong Kong</div><div class="d" data-i18n="c_hk_d">secondary students moderate–severe depression; 20.5% anxiety (2024)</div></div>
+      <div class="stat honey"><div class="n">84,130</div><div class="l" data-i18n="c_sen_l">HK SEN</div><div class="d" data-i18n="c_sen_d">students (10.7%); 67,870 in mainstream (12.6%)</div></div>
+      <div class="stat deep"><div class="n">20%</div><div class="l" data-i18n="c_silent_l">Silent</div><div class="d" data-i18n="c_silent_d">of HK teens would NOT seek help; only 28.5% talk to an adult (YMCA 2024)</div></div>
+    </div>
+    <p class="src" data-i18n="crisis_note">Sources: HK Baptist Oi Kwan 2024 Well-Being Survey (n=1,646); YMCA 2024; EDB 2024/25; China Mental Health Blue Book 2023.</p>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="alt" id="method">
+  <div class="wrap">
+    <div class="kicker" data-i18n="method_kicker">The Problem → Our Method</div>
+    <h2 data-i18n="method_title">Three gaps. One closed loop.</h2>
+    <p data-i18n="method_lead">For every painpoint, EmoPlay follows a simple, defensible method: <b>Narrow</b> the signal → <b>Detect</b> risk early → <b>Solve</b> inside the golden window.</p>
+    <div class="pp">
+      <div class="card">
+        <h3 data-i18n="p1_t">1 · Invisible Emotions</h3>
+        <p data-i18n="p1_d">Teachers &amp; parents lack real-time, objective emotional signals. By the time a child is flagged, the crisis has already escalated.</p>
+        <div class="steps">
+          <div class="step s1"><b data-i18n="narrow">Narrow</b><span data-i18n="p1_n">Daily 60-sec check-in + 25 FACS games flag the first deviation.</span></div>
+          <div class="step s2"><b data-i18n="detect">Detect</b><span data-i18n="p1_dt">2,082-term NLP scores risk vs. age-normed baseline.</span></div>
+          <div class="step s3"><b data-i18n="solve">Solve</b><span data-i18n="p1_s">Child vault + CASEL radar alerts parent/teacher early.</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="p2_t">2 · SEL Shortage + Unsafe AI</h3>
+        <p data-i18n="p2_d">One counsellor can't cover 500+ students. Generic AI chatbots have no CASEL framework, no escalation — the unsafe "tree hole".</p>
+        <div class="steps">
+          <div class="step s1"><b data-i18n="narrow">Narrow</b><span data-i18n="p2_n">Game-based CASEL 5×17 + LEGO® Serious Play® reach every child.</span></div>
+          <div class="step s2"><b data-i18n="detect">Detect</b><span data-i18n="p2_dt">Safe AI 'Bee' with hard guardrails flags risk, never encourages harm.</span></div>
+          <div class="step s3"><b data-i18n="solve">Solve</b><span data-i18n="p2_s">Teacher heatmap + human escalation — always in the loop.</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="p3_t">3 · Broken Family–School Loop</h3>
+        <p data-i18n="p3_d">Parents see tantrums at home; teachers see withdrawal in class; clinicians see a crisis months later. Golden windows are missed.</p>
+        <div class="steps">
+          <div class="step s1"><b data-i18n="narrow">Narrow</b><span data-i18n="p3_n">One child-owned vault shares 30-day curves + CASEL radar.</span></div>
+          <div class="step s2"><b data-i18n="detect">Detect</b><span data-i18n="p3_dt">Home &amp; school read the same early signal.</span></div>
+          <div class="step s3"><b data-i18n="solve">Solve</b><span data-i18n="p3_s">Both act on one story, inside the GZ 'Screen-Alert-Intervene' loop.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT: TOOLS (localized interactive) -->
+<section id="product">
+  <div class="wrap">
+    <div class="kicker" data-i18n="product_kicker">Our Product · Live Platform</div>
+    <h2 data-i18n="product_title">EmoPlay Tools — working, not slideware</h2>
+    <p data-i18n="product_lead">A 466 KB zero-dependency SPA, edge-deployed and offline-capable. Try the interactive demos below (switch language any time).</p>
+
+    <div class="tool">
+      <div>
+        <h3 data-i18n="t1_t">Mood Check-in</h3>
+        <p data-i18n="t1_d">60-second daily emotional signal — feels like a game, not a test. Tap how you feel; the engine codes it privately on-device.</p>
+      </div>
+      <div class="demo">
+        <div class="mood" id="mood">
+          <span data-m="0">😄</span><span data-m="1">🙂</span><span data-m="2">😐</span><span data-m="3">😟</span><span data-m="4">😢</span><span data-m="5">😡</span>
+        </div>
+        <p id="moodout" style="margin-top:10px;font-size:13px;color:var(--brand)" data-i18n="mood_hint">Tap an emoji to log today's check-in.</p>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div>
+        <h3 data-i18n="t2_t">25-FACS Micro-Expression Gallery</h3>
+        <p data-i18n="t2_d">Objective facial emotion coding — the "what" a child feels, taught through playful camera games. A sample of the coded set:</p>
+      </div>
+      <div class="demo">
+        <div class="faces" id="faces"></div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div>
+        <h3 data-i18n="t3_t">Parent Dashboard</h3>
+        <p data-i18n="t3_d">One-screen daily signal — calm / watch / alert, never a clinical label. Trend curves over 30/90 days; escalation path with local hotline.</p>
+      </div>
+      <div class="demo">
+        <svg class="radar" viewBox="0 0 100 100">
+          <polygon points="50,50 50,12 86,32 78,72 22,72 14,32" fill="none" stroke="#196AA4" stroke-width="1.5"/>
+          <polygon points="50,50 50,30 70,40 64,62 36,62 30,40" fill="#AE844B" fill-opacity="0.5"/>
+          <text x="50" y="9" font-size="7" text-anchor="middle" fill="#0E2A3B" data-i18n="rl_self">Self-aware</text>
+          <text x="90" y="34" font-size="7" fill="#0E2A3B" data-i18n="rl_social">Social</text>
+          <text x="82" y="76" font-size="7" fill="#0E2A3B" data-i18n="rl_rel">Relation</text>
+          <text x="18" y="76" font-size="7" fill="#0E2A3B" data-i18n="rl_dec">Decision</text>
+          <text x="6" y="34" font-size="7" fill="#0E2A3B" data-i18n="rl_manage">Manage</text>
+        </svg>
+        <p style="font-size:12px;color:var(--muted)" data-i18n="t3_cap">CASEL 5×17 radar from the child's growth vault.</p>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div>
+        <h3 data-i18n="t4_t">Classroom Heatmap</h3>
+        <p data-i18n="t4_d">Cohort screening at a glance — which classes need attention this week. Maps to Guangzhou's 'Screen → Alert → Intervene' loop.</p>
+      </div>
+      <div class="demo">
+        <div class="heat" id="heat"></div>
+        <p style="font-size:11px;color:var(--muted);margin-top:6px" data-i18n="heat_legend">Green = calm · Amber = watch · Red = alert (auto-flagged)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAY -->
+<section id="play">
+  <div class="wrap">
+    <div class="kicker" data-i18n="play_kicker">Play First · The Methodology</div>
+    <h2 data-i18n="play_title">Off the pad, into the bricks</h2>
+    <p data-i18n="play_lead">The real crisis isn't screens — it's that children regulate emotion through their hands, not a glass rectangle. EmoPlay is built on LEGO® Serious Play® + Strategic Play®: kids externalise feelings by building, then a 60-second on-device check-in captures the signal. Tangible first, AI second.</p>
+
+    <div style="background:var(--deep);color:#fff;border-radius:14px;padding:22px;margin:22px 0;text-align:center;font-family:'Oswald',sans-serif;font-size:22px;line-height:1.5">
+      <span style="color:var(--honey)">Brick − Pad = Regulation</span> &nbsp;·&nbsp; <span style="color:var(--honey)">Tangible Play × SEL = Emotional Growth</span>
+    </div>
+
+    <h3 data-i18n="play_steps_t" style="margin-top:8px;color:var(--deep)">The 4-step play loop</h3>
+    <div class="steps">
+      <div class="step s1"><b data-i18n="play_s1_t">Pose</b><span data-i18n="play_s1_d">“Build the feeling that was biggest in today's play.”</span></div>
+      <div class="step s2"><b data-i18n="play_s2_t">Construct</b><span data-i18n="play_s2_d">Silent, metaphorical brick model — lowers verbal pressure.</span></div>
+      <div class="step s3"><b data-i18n="play_s3_t">Share</b><span data-i18n="play_s3_d">Child narrates the model; the feeling becomes safe to name.</span></div>
+      <div class="step"><b data-i18n="play_s4_t">Reflect</b><span data-i18n="play_s4_d">On-device AI prompts one check-in question — consented, never surveillance.</span></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat coral"><div class="n" data-i18n="play_n1">≤1h</div><div class="l" data-i18n="play_l1">WHO</div><div class="d" data-i18n="play_d1">screen cap for ages 2–4; “bring back play.”</div></div>
+      <div class="stat"><div class="n" data-i18n="play_n2">8h39m</div><div class="l" data-i18n="play_l2">US teens</div><div class="d" data-i18n="play_d2">avg recreational screen time/day (Common Sense 2023).</div></div>
+      <div class="stat honey"><div class="n" data-i18n="play_n3">−0.16</div><div class="l" data-i18n="play_l3">SMD</div><div class="d" data-i18n="play_d3">screen-time drop across 21 RCTs; durable ≥7 months.</div></div>
+      <div class="stat deep"><div class="n" data-i18n="play_n4">I-SOCIALISE</div><div class="l" data-i18n="play_l4">RCT</div><div class="d" data-i18n="play_d4">250 autistic children; brick therapy lifts social skills.</div></div>
+    </div>
+
+    <div class="pp" style="margin-top:26px">
+      <div class="card"><h3 data-i18n="play_c1_t">Off-pad by design</h3><p data-i18n="play_c1_d">LEGO® building is the intervention; the screen is only the 60-second check-in after. No camera-on surveillance, no endless feed.</p></div>
+      <div class="card"><h3 data-i18n="play_c2_t">Certified facilitation</h3><p data-i18n="play_c2_d">Our founder is a LEGO® Serious Play® Certified Facilitator (Strategic Play® Global / Global Federation Master-Trainer pathway) — facilitator-led, evidence-informed, credible.</p></div>
+      <div class="card"><h3 data-i18n="play_c3_t">Maps to CASEL 5</h3><p data-i18n="play_c3_d">Every build maps to a CASEL competency (self-awareness → responsible decision-making), so play is measurable SEL, not just fun.</p></div>
+    </div>
+
+    <p class="src" data-i18n="play_src">Sources: WHO 2019 screen guidance; Common Sense Media 2023; SCREENS RCT (JAMA Network Open); I-SOCIALISE cluster RCT (Wright et al. 2023); LEGO Foundation Whitebread et al. 2017; LEGO Build Big Feelings 2026.</p>
+  </div>
+</section>
+
+<!-- ENGINE -->
+<section class="alt" id="engine">
+  <div class="wrap">
+    <div class="kicker" data-i18n="engine_kicker">Technology · The Engine</div>
+    <h2 data-i18n="engine_title">Five evidence-based frameworks, one on-device engine</h2>
+    <p data-i18n="engine_lead">EmoPlay's emotion engine fuses four scientifically grounded signal sources, then runs entirely on-device — no raw biometric video ever leaves the child's phone or the school edge gateway.</p>
+    <div class="arch">
+      <div class="node"><div class="ic">😊</div><b data-i18n="e_facs">25 FACS</b><span data-i18n="e_facs_d">Objective facial micro-expression coding</span></div>
+      <div class="node"><div class="ic">💬</div><b data-i18n="e_nlp">2,082-term NLP</b><span data-i18n="e_nlp_d">Multilingual sentiment (Cantonese/Mandarin/English)</span></div>
+      <div class="node"><div class="ic">🌱</div><b data-i18n="e_casel">CASEL 5×17</b><span data-i18n="e_casel_d">SEL skill framework we teach &amp; measure</span></div>
+      <div class="node"><div class="ic">🧠</div><b data-i18n="e_pank">Panksepp 7</b><span data-i18n="e_pank_d">Affective-neuroscience engagement basis</span></div>
+    </div>
+    <div class="arch" style="grid-template-columns:1fr;margin-top:0">
+      <div class="arrow" data-i18n="e_arrow">▼  fuse  ▼</div>
+    </div>
+    <div class="enginebox">
+      <h3 data-i18n="e_core_t">On-device edge inference · 466 KB · sub-200 ms latency</h3>
+      <p data-i18n="e_core_d">The fused signal is scored against age-normed emotional-growth curves (ages 4–22) and routed to the next age-appropriate activity. Public research reports ~85–88% emotion-classification accuracy on RAF-DB / DEAP-class datasets, with edge inference holding latency under 200 ms — privacy and responsiveness are designed in, not bolted on.</p>
+      <p style="margin-top:10px"><b data-i18n="e_demo_t">Try the NLP mini-engine:</b> <span data-i18n="e_demo_d">type a sentence and the demo scores its emotional signal (illustrative, not clinical).</span></p>
+      <textarea id="engineInput" rows="2" data-i18n-ph="e_ph" placeholder="e.g. I feel so tired and nobody understands me"></textarea>
+      <button class="btn honey" id="engineRun" style="margin-top:10px" data-i18n="e_run">Run demo</button>
+      <div class="result" id="engineResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY & SAFETY -->
+<section id="privacy">
+  <div class="wrap">
+    <div class="kicker" data-i18n="priv_kicker">Privacy &amp; Safety · Compliance</div>
+    <h2 data-i18n="priv_title">A safe "tree hole", by design</h2>
+    <p data-i18n="priv_lead">Generic companion AI has driven real harm (Character.AI &amp; ChatGPT minor-death cases; China's Aug-2025 ban on companion-AI emotional dependency). EmoPlay is engineered the opposite way.</p>
+    <div class="priv">
+      <div class="item"><h4 data-i18n="pr1_t">Privacy-by-design</h4><p data-i18n="pr1_d">On-device / edge inference — no raw face video or voice stored. Aligned with PIPL (China), COPPA &amp; GDPR-K (minors): data minimisation, verifiable parental consent, right to erasure.</p></div>
+      <div class="item"><h4 data-i18n="pr2_t">Safe AI 'Bee'</h4><p data-i18n="pr2_d">Hard guardrails: no medical advice, no encouragement of harm, no emotional dependency. A child is always told "a grown-up is here too."</p></div>
+      <div class="item"><h4 data-i18n="pr3_t">Human-in-the-loop</h4><p data-i18n="pr3_d">Auto-flagged risk routes to a parent, teacher or the city hotline — never to an autonomous chatbot decision. The AI supports; it does not replace adults.</p></div>
+      <div class="item"><h4 data-i18n="pr4_t">No dark patterns</h4><p data-i18n="pr4_d">No behavioural advertising, no manipulative loops, no third-party tracking. Engagement comes from play and growth, not compulsion.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH FRAMEWORKS -->
+<section class="alt">
+  <div class="wrap">
+    <div class="kicker" data-i18n="tech_kicker">Technology</div>
+    <h2 data-i18n="tech_title">The science stack</h2>
+    <div class="pp">
+      <div class="card"><h3 data-i18n="tf1_t">25 FACS micro-expressions</h3><p data-i18n="tf1_d">Objective facial emotion coding — the "what" a child feels.</p></div>
+      <div class="card"><h3 data-i18n="tf2_t">2,082-term NLP dictionary</h3><p data-i18n="tf2_d">Multilingual sentiment — Cantonese + Mandarin + English.</p></div>
+      <div class="card"><h3 data-i18n="tf3_t">CASEL 5×17</h3><p data-i18n="tf3_d">SEL skill framework we teach &amp; measure (5 competencies × 17 sub-skills).</p></div>
+      <div class="card"><h3 data-i18n="tf4_t">Panksepp 7 systems</h3><p data-i18n="tf4_d">Affective-neuroscience basis for engagement &amp; reward.</p></div>
+      <div class="card"><h3 data-i18n="tf5_t">LEGO® Serious Play®</h3><p data-i18n="tf5_d">Reflective facilitation — certified Strategic Play Global facilitator.</p></div>
+      <div class="card"><h3 data-i18n="tf6_t">Longitudinal norms</h3><p data-i18n="tf6_d">Emotional-growth curves ages 4–22 — a compounding data moat.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY -->
+<section id="company">
+  <div class="wrap">
+    <div class="kicker" data-i18n="company_kicker">Company &amp; Group</div>
+    <h2 data-i18n="company_title">Guangzhou entity × Hong Kong network</h2>
+    <p data-i18n="company_lead">A first-in-nation law created the market; we own the tool. The group is structured for cross-border GBA execution.</p>
+    <div class="group">
+      <div class="ent">
+        <h4 data-i18n="ent1_t">广东丞锋人工智能有限公司</h4>
+        <p data-i18n="ent1_d">Operating entity · Guangzhou Nansha. Registered to capture GBA policy support, Nansha entity incentives, and the 3,806-school / 2.93M-student mandated buyer.</p>
+      </div>
+      <div class="ent hk">
+        <h4 data-i18n="ent2_t">BeeVerse Hong Kong</h4>
+        <p data-i18n="ent2_d">Established August 2025 — holding &amp; business development. Founder Kwan Chi Ho, Jonathan (关智豪) brings 20+ yrs operations-excellence across Sun Life, Chubb &amp; HSBC.</p>
+      </div>
+    </div>
+    <div class="chips">
+      <span class="chip">Chubb Insurance</span><span class="chip">Bowtie Insurance</span><span class="chip">Sun Life</span><span class="chip">Preface AI</span><span class="chip">Guangzhou Yuyi Technology</span><span class="chip">Huaiyan (CityGuard)</span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION CRITERIA -->
+<section class="alt" id="criteria">
+  <div class="wrap">
+    <div class="kicker" data-i18n="crit_kicker">Competition Fit · Judging Rubric</div>
+    <h2 data-i18n="crit_title">Mapped to how the judges score</h2>
+    <p data-i18n="crit_lead">The 2026 Guangzhou Sci-Tech Innovation Competition (Global Division) / HKUST One-Million weighs five dimensions. EmoPlay is built to win on exactly the two that carry 50% of the score.</p>
+    <div class="crit">
+      <div class="w"><b data-i18n="cw1_t">Technology &amp; Product · 25%</b><div class="bar"><i style="width:90%"></i></div><div class="align" data-i18n="cw1_a">Edge engine, 5 science frameworks, live product, longitudinal data asset.</div></div>
+      <div class="w"><b data-i18n="cw2_t">Industrialisation (GZ) · 25%</b><div class="bar"><i style="width:95%"></i></div><div class="align" data-i18n="cw2_a">Nansha entity + first-in-nation law = a captive, mandated buyer of 3,806 schools.</div></div>
+      <div class="w"><b data-i18n="cw3_t">Industry &amp; Market · 20%</b><div class="bar"><i style="width:85%"></i></div><div class="align" data-i18n="cw3_a">SEL market CAGR 27.2% (USD 325M → 2.22B); social value + commercial upside.</div></div>
+      <div class="w"><b data-i18n="cw4_t">Team · 15%</b><div class="bar"><i style="width:88%"></i></div><div class="align" data-i18n="cw4_a">Operator-led (HK$4.9B eMPF), Chubb/Bowtie/Sun Life network, clinical &amp; AI advisors.</div></div>
+      <div class="w"><b data-i18n="cw5_t">Financial Analysis · 15%</b><div class="bar"><i style="width:82%"></i></div><div class="align" data-i18n="cw5_a">¥155M GZ+HK Yr5; ROE ~97.6%; insurer cross-sell line competitors can't copy.</div></div>
+      <div class="w"><b data-i18n="cw6_t">Prize-gate · GZ registration</b><div class="bar"><i style="width:100%"></i></div><div class="align" data-i18n="cw6_a">Non-GZ firms must register a local entity to claim the prize — we already have 广东丞锋.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="alt" style="text-align:center" id="demo">
+  <div class="wrap">
+    <h2 data-i18n="cta_title">See EmoPlay live</h2>
+    <p style="margin:10px 0 22px" data-i18n="cta_lead">The platform above is deployed and working — open it on any device. If you viewed an earlier version, clear your browser cache (Ctrl/Cmd+Shift+R) to load the new trilingual build.</p>
+    <a class="btn" href="https://beeverse-hkns.github.io/emofriend-mvp1/?v=5" target="_blank" rel="noopener" data-i18n="cta_github">GitHub Pages demo ↗</a>
+    <a class="btn honey" href="https://static-zeta-one.vercel.app/emocare-platform" target="_blank" rel="noopener" data-i18n="cta_vercel">Vercel demo ↗</a>
+  </div>
+</section>
+
+<!-- DEMO GALLERY -->
+<section class="alt">
+  <div class="wrap">
+    <div class="kicker" data-i18n="gallery_kicker">Product Demo Screenshots</div>
+    <h2 data-i18n="gallery_title">What EmoPlay looks like in action</h2>
+    <p data-i18n="gallery_lead">Real product UI mockups (dump screens) showing how the platform narrows, detects and solves each painpoint.</p>
+    <div class="demos">
+      <div class="card" style="text-align:center"><h3 data-i18n="g1_t">Child / Teen App</h3><p style="font-size:13px;color:var(--muted);margin-bottom:10px" data-i18n="g1_d">Daily check-in, 25 FACS games, safe AI companion "Bee"</p><img src="assets/demos/mock_child.png" alt="EmoPlay child app"/></div>
+      <div class="card" style="text-align:center"><h3 data-i18n="g2_t">Parent Dashboard</h3><p style="font-size:13px;color:var(--muted);margin-bottom:10px" data-i18n="g2_d">Calm/Watch/Alert signal, 30-day trend, CASEL radar</p><img src="assets/demos/mock_parent.png" alt="EmoPlay parent dashboard"/></div>
+      <div class="card" style="text-align:center"><h3 data-i18n="g3_t">Teacher / School Heatmap</h3><p style="font-size:13px;color:var(--muted);margin-bottom:10px" data-i18n="g3_d">Cohort screening, auto-flag, GZ Screen→Alert→Intervene</p><img src="assets/demos/mock_teacher.png" alt="EmoPlay teacher heatmap"/></div>
+      <div class="card" style="text-align:center"><h3 data-i18n="g4_t">Live Platform Site</h3><p style="font-size:13px;color:var(--muted);margin-bottom:10px" data-i18n="g4_d">Open product page with interactive tools and Guangzhou data</p><img src="assets/demos/mock_site.png" alt="EmoPlay live site"/></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>EmoPlay · EmoCare</b> — a BeeVerse product · 广东丞锋人工智能有限公司 (Guangzhou) × BeeVerse Hong Kong (2025)</div>
+    <div style="margin-top:6px" data-i18n="foot_comp">Entered in the 2026 Guangzhou Sci-Tech Innovation Competition (Global Division) · HKUST One Million Dollar Entrepreneurship Competition (Guangzhou)</div>
+    <div class="src" data-i18n="foot_src">Sources: HK Baptist Oi Kwan 2024; YMCA 2024; EDB 2024/25; China Mental Health Blue Book 2023; Guangzhou Regulations on Student Mental Health (effective 2024-11-01). Engine accuracy figures from public RAF-DB/DEAP-class literature (85–88%). Financials are forward-looking projections.</div>
+  </div>
+</footer>
+
+<script>
+/* ============ i18n dictionary ============ */
+const I18N = {
+  en: {
+    nav_crisis:"Crisis", nav_method:"Method", nav_product:"Product", nav_engine:"Engine", nav_privacy:"Safety", nav_company:"Company", nav_criteria:"Criteria", nav_demo:"Demo",
+    hero_title:"EmoPlay · EmoCare", hero_sub:"AI + SEL Mental-Wellbeing Platform for Children & Teenagers (Ages 4–18)",
+    hero_lead:"Objective, early, privacy-first emotional signals for every child — before a crisis escalates. Built for Guangzhou, Hong Kong & Hangzhou: B2B schools & universities, then B2C families. Available in English, Traditional Chinese and Simplified Chinese.",
+    hero_cta1:"Explore the live tools ↓", hero_cta2:"Open live demo ↗",
+    hero_pill1:"Entered by 广东丞锋人工智能有限公司 (Guangzhou Nansha)", hero_pill2:"BeeVerse Hong Kong · est. Aug 2025",
+    crisis_kicker:"The Crisis", crisis_title:"Child mental health is a ticking clock",
+    crisis_lead:"Every year of delay is a generation of preventable suffering. SEN and high-risk children are identified only after a crisis escalates; schools cannot scale support (~1 social worker : 500+ students); the family–school data loop is broken.",
+    c_china_l:"China senior-high", c_china_d:"depression detection rate (Blue Book 2023); 30% junior-high, 10% primary",
+    c_hk_l:"Hong Kong", c_hk_d:"secondary students moderate–severe depression; 20.5% anxiety (2024)",
+    c_sen_l:"HK SEN", c_sen_d:"students (10.7%); 67,870 in mainstream (12.6%)",
+    c_silent_l:"Silent", c_silent_d:"of HK teens would NOT seek help; only 28.5% talk to an adult (YMCA 2024)",
+    crisis_note:"Sources: HK Baptist Oi Kwan 2024 Well-Being Survey (n=1,646); YMCA 2024; EDB 2024/25; China Mental Health Blue Book 2023.",
+    method_kicker:"The Problem → Our Method", method_title:"Three gaps. One closed loop.",
+    method_lead:"For every painpoint, EmoPlay follows a simple, defensible method: Narrow the signal → Detect risk early → Solve inside the golden window.",
+    narrow:"Narrow", detect:"Detect", solve:"Solve",
+    p1_t:"1 · Invisible Emotions", p1_d:"Teachers & parents lack real-time, objective emotional signals. By the time a child is flagged, the crisis has already escalated.",
+    p1_n:"Daily 60-sec check-in + 25 FACS games flag the first deviation.", p1_dt:"2,082-term NLP scores risk vs. age-normed baseline.", p1_s:"Child vault + CASEL radar alerts parent/teacher early.",
+    p2_t:"2 · SEL Shortage + Unsafe AI", p2_d:"One counsellor can't cover 500+ students. Generic AI chatbots have no CASEL framework, no escalation — the unsafe 'tree hole'.",
+    p2_n:"Game-based CASEL 5×17 + LEGO® Serious Play® reach every child.", p2_dt:"Safe AI 'Bee' with hard guardrails flags risk, never encourages harm.", p2_s:"Teacher heatmap + human escalation — always in the loop.",
+    p3_t:"3 · Broken Family–School Loop", p3_d:"Parents see tantrums at home; teachers see withdrawal in class; clinicians see a crisis months later. Golden windows are missed.",
+    p3_n:"One child-owned vault shares 30-day curves + CASEL radar.", p3_dt:"Home & school read the same early signal.", p3_s:"Both act on one story, inside the GZ 'Screen-Alert-Intervene' loop.",
+    product_kicker:"Our Product · Live Platform", product_title:"EmoPlay Tools — working, not slideware",
+    product_lead:"A 466 KB zero-dependency SPA, edge-deployed and offline-capable. Try the interactive demos below (switch language any time).",
+    t1_t:"Mood Check-in", t1_d:"60-second daily emotional signal — feels like a game, not a test. Tap how you feel; the engine codes it privately on-device.",
+    t2_t:"25-FACS Micro-Expression Gallery", t2_d:"Objective facial emotion coding — the 'what' a child feels, taught through playful camera games. A sample of the coded set:",
+    t3_t:"Parent Dashboard", t3_d:"One-screen daily signal — calm / watch / alert, never a clinical label. Trend curves over 30/90 days; escalation path with local hotline.",
+    t3_cap:"CASEL 5×17 radar from the child's growth vault.",
+    t4_t:"Classroom Heatmap", t4_d:"Cohort screening at a glance — which classes need attention this week. Maps to Guangzhou's 'Screen → Alert → Intervene' loop.",
+    heat_legend:"Green = calm · Amber = watch · Red = alert (auto-flagged)",
+    mood_hint:"Tap an emoji to log today's check-in.",
+    rl_self:"Self-aware", rl_social:"Social", rl_rel:"Relation", rl_dec:"Decision", rl_manage:"Manage",
+    facs: [["😊","Happiness"],["😢","Sadness"],["😠","Anger"],["😨","Fear"],["😲","Surprise"],["🤢","Disgust"],["🙄","Contempt"],["😳","Embarrass"],["😔","Anguish"],["🤔","Thoughtful"],["😌","Content"],["😴","Tired"]],
+    mood_resp:["Great — keep the streak!","Good day","Neutral","A bit low — try a 2-min check-in","Sad — we'll suggest a calming activity","Angry — breathing exercise queued"],
+    engine_kicker:"Technology · The Engine", engine_title:"Five evidence-based frameworks, one on-device engine",
+    engine_lead:"EmoPlay's emotion engine fuses four scientifically grounded signal sources, then runs entirely on-device — no raw biometric video ever leaves the child's phone or the school edge gateway.",
+    e_facs:"25 FACS", e_facs_d:"Objective facial micro-expression coding",
+    e_nlp:"2,082-term NLP", e_nlp_d:"Multilingual sentiment (Cantonese/Mandarin/English)",
+    e_casel:"CASEL 5×17", e_casel_d:"SEL skill framework we teach & measure",
+    e_pank:"Panksepp 7", e_pank_d:"Affective-neuroscience engagement basis",
+    e_arrow:"▼  fuse  ▼",
+    e_core_t:"On-device edge inference · 466 KB · sub-200 ms latency",
+    e_core_d:"The fused signal is scored against age-normed emotional-growth curves (ages 4–22) and routed to the next age-appropriate activity. Public research reports ~85–88% emotion-classification accuracy on RAF-DB / DEAP-class datasets, with edge inference holding latency under 200 ms — privacy and responsiveness are designed in, not bolted on.",
+    e_demo_t:"Try the NLP mini-engine:", e_demo_d:"type a sentence and the demo scores its emotional signal (illustrative, not clinical).",
+    e_ph:"e.g. I feel so tired and nobody understands me", e_run:"Run demo",
+    priv_kicker:"Privacy & Safety · Compliance", priv_title:"A safe 'tree hole', by design",
+    priv_lead:"Generic companion AI has driven real harm (Character.AI & ChatGPT minor-death cases; China's Aug-2025 ban on companion-AI emotional dependency). EmoPlay is engineered the opposite way.",
+    pr1_t:"Privacy-by-design", pr1_d:"On-device / edge inference — no raw face video or voice stored. Aligned with PIPL (China), COPPA & GDPR-K (minors): data minimisation, verifiable parental consent, right to erasure.",
+    pr2_t:"Safe AI 'Bee'", pr2_d:"Hard guardrails: no medical advice, no encouragement of harm, no emotional dependency. A child is always told 'a grown-up is here too.'",
+    pr3_t:"Human-in-the-loop", pr3_d:"Auto-flagged risk routes to a parent, teacher or the city hotline — never to an autonomous chatbot decision. The AI supports; it does not replace adults.",
+    pr4_t:"No dark patterns", pr4_d:"No behavioural advertising, no manipulative loops, no third-party tracking. Engagement comes from play and growth, not compulsion.",
+    tech_kicker:"Technology", tech_title:"The science stack",
+    tf1_t:"25 FACS micro-expressions", tf1_d:"Objective facial emotion coding — the 'what' a child feels.",
+    tf2_t:"2,082-term NLP dictionary", tf2_d:"Multilingual sentiment — Cantonese + Mandarin + English.",
+    tf3_t:"CASEL 5×17", tf3_d:"SEL skill framework we teach & measure (5 competencies × 17 sub-skills).",
+    tf4_t:"Panksepp 7 systems", tf4_d:"Affective-neuroscience basis for engagement & reward.",
+    tf5_t:"LEGO® Serious Play®", tf5_d:"Reflective facilitation — certified Strategic Play Global facilitator.",
+    tf6_t:"Longitudinal norms", tf6_d:"Emotional-growth curves ages 4–22 — a compounding data moat.",
+    company_kicker:"Company & Group", company_title:"Guangzhou entity × Hong Kong network",
+    company_lead:"A first-in-nation law created the market; we own the tool. The group is structured for cross-border GBA execution.",
+    ent1_t:"广东丞锋人工智能有限公司", ent1_d:"Operating entity · Guangzhou Nansha. Registered to capture GBA policy support, Nansha entity incentives, and the 3,806-school / 2.93M-student mandated buyer.",
+    ent2_t:"BeeVerse Hong Kong", ent2_d:"Established August 2025 — holding & business development. Founder Kwan Chi Ho, Jonathan (关智豪) brings 20+ yrs operations-excellence across Sun Life, Chubb & HSBC.",
+    crit_kicker:"Competition Fit · Judging Rubric", crit_title:"Mapped to how the judges score",
+    crit_lead:"The 2026 Guangzhou Sci-Tech Innovation Competition (Global Division) / HKUST One-Million weighs five dimensions. EmoPlay is built to win on exactly the two that carry 50% of the score.",
+    cw1_t:"Technology & Product · 25%", cw1_a:"Edge engine, 5 science frameworks, live product, longitudinal data asset.",
+    cw2_t:"Industrialisation (GZ) · 25%", cw2_a:"Nansha entity + first-in-nation law = a captive, mandated buyer of 3,806 schools.",
+    cw3_t:"Industry & Market · 20%", cw3_a:"SEL market CAGR 27.2% (USD 325M → 2.22B); social value + commercial upside.",
+    cw4_t:"Team · 15%", cw4_a:"Operator-led (HK$4.9B eMPF), Chubb/Bowtie/Sun Life network, clinical & AI advisors.",
+    cw5_t:"Financial Analysis · 15%", cw5_a:"¥155M GZ+HK Yr5; ROE ~97.6%; insurer cross-sell line competitors can't copy.",
+    cw6_t:"Prize-gate · GZ registration", cw6_a:"Non-GZ firms must register a local entity to claim the prize — we already have 广东丞锋.",
+    cta_title:"See EmoPlay live", cta_lead:"The platform above is deployed and working — open it on any device. If you viewed an earlier version, clear your browser cache (Ctrl/Cmd+Shift+R) to load the new trilingual build.",
+    cta_github:"GitHub Pages demo ↗", cta_vercel:"Vercel demo ↗",
+    gallery_kicker:"Product Demo Screenshots", gallery_title:"What EmoPlay looks like in action",
+    gallery_lead:"Real product UI mockups (dump screens) showing how the platform narrows, detects and solves each painpoint.",
+    g1_t:"Child / Teen App", g1_d:"Daily check-in, 25 FACS games, safe AI companion 'Bee'",
+    g2_t:"Parent Dashboard", g2_d:"Calm/Watch/Alert signal, 30-day trend, CASEL radar",
+    g3_t:"Teacher / School Heatmap", g3_d:"Cohort screening, auto-flag, GZ Screen→Alert→Intervene",
+    g4_t:"Live Platform Site", g4_d:"Open product page with interactive tools and Guangzhou data",
+    foot_comp:"Entered in the 2026 Guangzhou Sci-Tech Innovation Competition (Global Division) · HKUST One Million Dollar Entrepreneurship Competition (Guangzhou)",
+    foot_src:"Sources: HK Baptist Oi Kwan 2024; YMCA 2024; EDB 2024/25; China Mental Health Blue Book 2023; Guangzhou Regulations on Student Mental Health (effective 2024-11-01). Engine accuracy figures from public RAF-DB/DEAP-class literature (85–88%). Financials are forward-looking projections.",
+    nav_play:"Play",
+    play_kicker:"Play First · The Methodology",
+    play_title:"Off the pad, into the bricks",
+    play_lead:"The real crisis isn't screens — it's that children regulate emotion through their hands, not a glass rectangle. EmoPlay is built on LEGO® Serious Play® + Strategic Play®: kids externalise feelings by building, then a 60-second on-device check-in captures the signal. Tangible first, AI second.",
+    play_steps_t:"The 4-step play loop",
+    play_s1_t:"Pose", play_s1_d:"“Build the feeling that was biggest in today's play.”",
+    play_s2_t:"Construct", play_s2_d:"Silent, metaphorical brick model — lowers verbal pressure.",
+    play_s3_t:"Share", play_s3_d:"Child narrates the model; the feeling becomes safe to name.",
+    play_s4_t:"Reflect", play_s4_d:"On-device AI prompts one check-in question — consented, never surveillance.",
+    play_n1:"≤1h", play_l1:"WHO", play_d1:"screen cap for ages 2–4; “bring back play.”",
+    play_n2:"8h39m", play_l2:"US teens", play_d2:"avg recreational screen time/day (Common Sense 2023).",
+    play_n3:"−0.16", play_l3:"SMD", play_d3:"screen-time drop across 21 RCTs; durable ≥7 months.",
+    play_n4:"I-SOCIALISE", play_l4:"RCT", play_d4:"250 autistic children; brick therapy lifts social skills.",
+    play_c1_t:"Off-pad by design", play_c1_d:"LEGO® building is the intervention; the screen is only the 60-second check-in after. No camera-on surveillance, no endless feed.",
+    play_c2_t:"Certified facilitation", play_c2_d:"Our founder is a LEGO® Serious Play® Certified Facilitator (Strategic Play® Global / Global Federation Master-Trainer pathway) — facilitator-led, evidence-informed, credible.",
+    play_c3_t:"Maps to CASEL 5", play_c3_d:"Every build maps to a CASEL competency (self-awareness → responsible decision-making), so play is measurable SEL, not just fun.",
+    play_src:"Sources: WHO 2019 screen guidance; Common Sense Media 2023; SCREENS RCT (JAMA Network Open); I-SOCIALISE cluster RCT (Wright et al. 2023); LEGO Foundation Whitebread et al. 2017; LEGO Build Big Feelings 2026."
+  },
+  zhHant: {
+    nav_crisis:"危機", nav_method:"方法", nav_product:"產品", nav_engine:"引擎", nav_privacy:"安全", nav_company:"公司", nav_criteria:"評分", nav_demo:"展示",
+    hero_title:"EmoPlay · EmoCare",
+    hero_sub:"AI + SEL 兒童及青少年心理健康平台（4–18 歲）",
+    hero_lead:"在危機升級前，為每個孩子提供客觀、早期、私隱優先的情緒訊號。為廣州、香港及杭州而建：先攻 B2B 學校及大學，再拓展 B2C 家庭。提供英文、繁體中文及簡體中文三語版本。",
+    hero_cta1:"探索實時工具 ↓", hero_cta2:"開啟實時示範 ↗",
+    hero_pill1:"參賽主體：广东丞锋人工智能有限公司（廣州南沙）", hero_pill2:"BeeVerse Hong Kong · 成立於 2025 年 8 月",
+    crisis_kicker:"危機", crisis_title:"兒童心理健康是一顆計時炸彈",
+    crisis_lead:"每拖延一年，就是一代本可避免的苦難。SEN 及高風險兒童往往要等到危機爆發後才被識別；學校難以擴展支援（約 1 名社工 : 500+ 學生）；家庭與學校的數據閉環是斷裂的。",
+    c_china_l:"中國高中", c_china_d:"抑鬱檢出率（2023 藍皮書）；初中 30%、小學 10%",
+    c_hk_l:"香港", c_hk_d:"中學生中度至嚴重抑鬱；2024 年焦慮 20.5%",
+    c_sen_l:"香港 SEN", c_sen_d:"學生（10.7%）；主流學校 67,870 人（12.6%）",
+    c_silent_l:"沉默", c_silent_d:"香港青少年不會主動求助；僅 28.5% 願向成人傾訴（YMCA 2024）",
+    crisis_note:"資料來源：香港浸信會愛群 2024 關顧調查（n=1,646）；YMCA 2024；EDB 2024/25；中國心理健康藍皮書 2023。",
+    method_kicker:"問題 → 我們的方法", method_title:"三個缺口，一個閉環。",
+    method_lead:"針對每個痛點，EmoPlay 遵循一套簡單且可防守的方法：收窄訊號 → 早期偵測 → 在黃金窗口內解決。",
+    narrow:"收窄", detect:"偵測", solve:"解決",
+    p1_t:"1 · 看不見的情緒", p1_d:"老師與家長缺乏即時、客觀的情緒訊號。等到孩子被標記時，危機早已升級。",
+    p1_n:"每日 60 秒打卡 + 25 個 FACS 遊戲，標記首個偏差。", p1_dt:"2,082 詞 NLP 對比年齡常模基線評估風險。", p1_s:"兒童專屬保險庫 + CASEL 雷達，提早警示家長／老師。",
+    p2_t:"2 · SEL 不足 + 不安全 AI", p2_d:"一名輔導員無法覆蓋 500+ 學生。通用 AI 聊天機械人沒有 CASEL 框架、沒有升級機制——就是不安全的「樹洞」。",
+    p2_n:"遊戲化 CASEL 5×17 + LEGO® Serious Play® 觸及每個孩子。", p2_dt:"設有嚴格防護欄的安全 AI「Bee」標記風險，絕不鼓勵傷害。", p2_s:"老師熱力圖 + 人工升級——人始終在環內。",
+    p3_t:"3 · 家庭—學校閉環斷裂", p3_d:"家長在家看到發脾氣，老師在課室看到退縮，臨床醫生數月後才看到危機。黃金窗口年年錯過。",
+    p3_n:"一個兒童擁有的保險庫，分享 30 天曲線 + CASEL 雷達。", p3_dt:"家庭與學校讀取同一早期訊號。", p3_s:"雙方在同一故事上行動，嵌入廣州「篩查—警示—介入」閉環。",
+    product_kicker:"我們的產品 · 實時平台", product_title:"EmoPlay 工具——實際可用，非空中樓閣",
+    product_lead:"466 KB 零依賴 SPA，邊緣部署、可離線運作。試試下方的互動示範（可隨時切換語言）。",
+    t1_t:"心情打卡", t1_d:"每日 60 秒情緒訊號——感覺像遊戲而非測驗。點選你的感受；引擎在裝置上私密編碼。",
+    t2_t:"25-FACS 微表情畫廊", t2_d:"客觀面部情緒編碼——孩子「感受什麼」，透過趣味的鏡頭遊戲教學。以下為編碼集合示例：",
+    t3_t:"家長儀表板", t3_d:"單屏每日訊號——平靜／留意／警示，絕非臨床標籤。30/90 天趨勢曲線；附本地熱線的升級路徑。",
+    t3_cap:"來自兒童成長保險庫的 CASEL 5×17 雷達。",
+    t4_t:"課室熱力圖", t4_d:"一目了然的群體篩查——本週哪些班級需要關注。對應廣州「篩查 → 警示 → 介入」閉環。",
+    heat_legend:"綠色 = 平靜 · 琥珀 = 留意 · 紅色 = 警示（自動標記）",
+    mood_hint:"點選表情符號記錄今日打卡。",
+    rl_self:"自我覺察", rl_social:"社交", rl_rel:"人際", rl_dec:"決策", rl_manage:"管理",
+    facs:[["😊","快樂"],["😢","悲傷"],["😠","憤怒"],["😨","恐懼"],["😲","驚訝"],["🤢","厭惡"],["🙄","輕蔑"],["😳","尷尬"],["😔","痛苦"],["🤔","沉思"],["😌","滿足"],["😴","疲倦"]],
+    mood_resp:["很棒——保持連續紀錄！","愉快的一天","中性","有點低落——試試 2 分鐘打卡","難過——我們建議一個紓緩活動","生氣——已排隊呼吸練習"],
+    engine_kicker:"技術 · 引擎", engine_title:"五套有實證基礎的框架，一個裝置端引擎",
+    engine_lead:"EmoPlay 的情緒引擎融合四個有科學基礎的訊號來源，然後完全在裝置端運行——原始生物特徵影片絕不離開孩子的手機或學校邊緣閘道。",
+    e_facs:"25 FACS", e_facs_d:"客觀面部微表情編碼",
+    e_nlp:"2,082 詞 NLP", e_nlp_d:"多語言情緒分析（粵語／普通話／英語）",
+    e_casel:"CASEL 5×17", e_casel_d:"我們教授並量度的 SEL 技能框架",
+    e_pank:"Panksepp 7", e_pank_d:"情感神經科學的參與與獎勵基礎",
+    e_arrow:"▼  融合  ▼",
+    e_core_t:"裝置端邊緣推論 · 466 KB · 低於 200 毫秒延遲",
+    e_core_d:"融合後的訊號會對比年齡常模情緒成長曲線（4–22 歲），並導向合適的下一個年齡活動。公開研究指 RAF-DB／DEAP 類數據集上情緒分類準確率約 85–88%，邊緣推論延遲低於 200 毫秒——私隱與即時性本就內建，而非事後加裝。",
+    e_demo_t:"試試 NLP 迷你引擎：", e_demo_d:"輸入一句話，示範會為其情緒訊號評分（僅作示範，非臨床用途）。",
+    e_ph:"例如：我很累，沒有人理解我", e_run:"執行示範",
+    priv_kicker:"私隱與安全 · 合規", priv_title:"一個安全的「樹洞」，由設計開始",
+    priv_lead:"通用伴侶 AI 已造成真實傷害（Character.AI 及 ChatGPT 未成年死亡個案；中國 2025 年 8 月禁止伴侶 AI 情感依賴）。EmoPlay 的設計方向完全相反。",
+    pr1_t:"私隱優先設計", pr1_d:"裝置端／邊緣推論——不儲存原始面部影片或語音。符合 PIPL（中國）、COPPA 及 GDPR-K（未成年人）：資料最小化、可驗證家長同意、刪除權。",
+    pr2_t:"安全的 AI「Bee」", pr2_d:"嚴格防護欄：不給醫療建議、不鼓勵傷害、不造成情感依賴。孩子總會聽到「也有大人在」。",
+    pr3_t:"人類在環", pr3_d:"自動標記的風險會轉介給家長、老師或城市熱線——絕不交由自主聊天機械人決定。AI 是輔助，而非取代成人。",
+    pr4_t:"無黑暗模式", pr4_d:"無行為廣告、無操控循環、無第三方追蹤。參與來自玩樂與成長，而非脅迫。",
+    tech_kicker:"技術", tech_title:"科學技術堆疊",
+    tf1_t:"25 FACS 微表情", tf1_d:"客觀面部情緒編碼——孩子「感受什麼」。",
+    tf2_t:"2,082 詞 NLP 詞典", tf2_d:"多語言情緒分析——粵語 + 普通話 + 英語。",
+    tf3_t:"CASEL 5×17", tf3_d:"我們教授並量度的 SEL 技能框架（5 項能力 × 17 項子技能）。",
+    tf4_t:"Panksepp 7 系統", tf4_d:"情感神經科學的參與與獎勵基礎。",
+    tf5_t:"LEGO® Serious Play®", tf5_d:"反思式引導——持證 Strategic Play Global 引導師。",
+    tf6_t:"長期常模", tf6_d:"4–22 歲情緒成長曲線——不斷增值的數據護城河。",
+    company_kicker:"公司與集團", company_title:"廣州實體 × 香港網絡",
+    company_lead:"全國首部相關法例創造了市場；工具由我們擁有。集團架構為跨境大灣區執行而設。",
+    ent1_t:"广东丞锋人工智能有限公司", ent1_d:"營運實體 · 廣州南沙。註冊以把握大灣區政策支援、南沙實體優惠，以及 3,806 間學校／293 萬名學生的強制買家。",
+    ent2_t:"BeeVerse Hong Kong", ent2_d:"成立於 2025 年 8 月——控股與業務拓展。創辦人關智豪（Kwan Chi Ho, Jonathan）擁有 20+ 年營運卓越經驗，橫跨 Sun Life、Chubb 及 HSBC。",
+    crit_kicker:"競賽契合 · 評分準則", crit_title:"對應評委的計分方式",
+    crit_lead:"2026 廣州科技創新創業大賽（全球賽）／港科大百萬獎金創業大賽（廣州）按五個維度計分。EmoPlay 正是為佔總分 50% 的兩項而建。",
+    cw1_t:"技術與產品 · 25%", cw1_a:"邊緣引擎、5 套科學框架、實時產品、長期數據資產。",
+    cw2_t:"產業化（廣州）· 25%", cw2_a:"南沙實體 + 全國首部法例 = 3,806 間學校的強制、專屬買家。",
+    cw3_t:"行業與市場 · 20%", cw3_a:"SEL 市場 CAGR 27.2%（3.25 億 → 22.2 億美元）；社會價值 + 商業上行。",
+    cw4_t:"團隊 · 15%", cw4_a:"營運主導（49 億港元 eMPF）、Chubb／Bowtie／Sun Life 網絡、臨床及 AI 顧問。",
+    cw5_t:"財務分析 · 15%", cw5_a:"第 5 年廣州+香港 1.55 億港元；ROE 約 97.6%；保險交叉銷售為對手無法複製的收入線。",
+    cw6_t:"獎金門檻 · 廣州註冊", cw6_a:"非廣州企業須註冊本地實體方可領獎——我們已有广东丞锋。",
+    cta_title:"即時看看 EmoPlay", cta_lead:"上方平台已部署並實際運作——在任何裝置開啟。如看過舊版本，請清除瀏覽器快取（Ctrl/Cmd+Shift+R）以載入新三語版本。",
+    cta_github:"GitHub Pages 示範 ↗", cta_vercel:"Vercel 示範 ↗",
+    gallery_kicker:"產品示範截圖", gallery_title:"EmoPlay 實際運作的樣子",
+    gallery_lead:"真實產品 UI 模擬圖（截圖），展示平台如何收窄、偵測並解決每個痛點。",
+    g1_t:"兒童／青少年 App", g1_d:"每日打卡、25 個 FACS 遊戲、安全 AI 伴侶「Bee」",
+    g2_t:"家長儀表板", g2_d:"平靜／留意／警示訊號、30 天趨勢、CASEL 雷達",
+    g3_t:"老師／學校熱力圖", g3_d:"群體篩查、自動標記、廣州篩查→警示→介入",
+    g4_t:"實時平台網站", g4_d:"開放產品頁，含互動工具與廣州數據",
+    foot_comp:"參賽：2026 廣州科技創新創業大賽（全球賽）· 香港科技大學百萬獎金創業大賽（廣州）",
+    foot_src:"資料來源：香港浸信會愛群 2024；YMCA 2024；EDB 2024/25；中國心理健康藍皮書 2023；廣州市中小學生心理健康促進條例（2024-11-01 生效）。引擎準確率來自公開 RAF-DB／DEAP 類文獻（85–88%）。財務數據為前瞻性預測。",
+    nav_play:"玩樂",
+    play_kicker:"玩樂優先 · 方法論",
+    play_title:"放下平板，動手砌",
+    play_lead:"真正的危機不是螢幕，而是孩子靠雙手而非玻璃長方形來調節情緒。EmoPlay 建基於 LEGO® Serious Play® 與 Strategic Play®：孩子透過砌積木把感受「外化」，隨後 60 秒的裝置端情緒打卡記錄信號。先 tangible（動手），後 AI。",
+    play_steps_t:"四步玩樂循環",
+    play_s1_t:"提問", play_s1_d:"「砌出今天玩樂中最大的感受。」",
+    play_s2_t:"建構", play_s2_d:"靜默、隱喻式的積木模型——減低語言壓力。",
+    play_s3_t:"分享", play_s3_d:"孩子講述模型；感受變得可以安全命名。",
+    play_s4_t:"反思", play_s4_d:"裝置端 AI 提出一條打卡問題——經同意，絕非監控。",
+    play_n1:"≤1小時", play_l1:"WHO", play_d1:"2–4 歲螢幕上限；「帶回玩樂」。",
+    play_n2:"8小時39分", play_l2:"美國青少年", play_d2:"每日平均休閒螢幕時間（Common Sense 2023）。",
+    play_n3:"−0.16", play_l3:"SMD", play_d3:"21 項 RCT 的螢幕時間降幅；≥7 個月持續。",
+    play_n4:"I-SOCIALISE", play_l4:"RCT", play_d4:"250 名自閉症兒童；積木療法提升社交技能。",
+    play_c1_t:"天生離屏", play_c1_d:"LEGO® 砌疊才是介入；螢幕只在之後的 60 秒打卡。沒有開鏡頭監控，沒有無盡資訊流。",
+    play_c2_t:"持證引導", play_c2_d:"我們的創辦人是 LEGO® Serious Play® 認證引導師（Strategic Play® Global／全球聯會 Master-Trainer 途徑）——引導主導、有實證基礎、可信。",
+    play_c3_t:"對應 CASEL 5", play_c3_d:"每次建構對應一項 CASEL 能力（自我覺察 → 負責任決策），所以玩樂是可量度的 SEL，不止好玩。",
+    play_src:"資料來源：WHO 2019 螢幕指引；Common Sense Media 2023；SCREENS RCT（JAMA Network Open）；I-SOCIALISE 群集 RCT（Wright 等 2023）；LEGO Foundation Whitebread 等 2017；LEGO Build Big Feelings 2026。"
+  },
+  zhHans: {
+    nav_crisis:"危机", nav_method:"方法", nav_product:"产品", nav_engine:"引擎", nav_privacy:"安全", nav_company:"公司", nav_criteria:"评分", nav_demo:"展示",
+    nav_play:"玩乐",
+    play_kicker:"玩乐优先 · 方法论",
+    play_title:"放下平板，动手砌",
+    play_lead:"真正的危机不是屏幕，而是孩子靠双手而非玻璃长方形来调节情绪。EmoPlay 建基于 LEGO® Serious Play® 与 Strategic Play®：孩子通过砌积木把感受“外化”，随后 60 秒的设备端情绪打卡记录信号。先 tangible（动手），后 AI。",
+    play_steps_t:"四步玩乐循环",
+    play_s1_t:"提问", play_s1_d:"“砌出今天玩乐中最大的感受。”",
+    play_s2_t:"建构", play_s2_d:"静默、隐喻式的积木模型——降低语言压力。",
+    play_s3_t:"分享", play_s3_d:"孩子讲述模型；感受变得可以安全命名。",
+    play_s4_t:"反思", play_s4_d:"设备端 AI 提出一条打卡问题——经同意，绝非监控。",
+    play_n1:"≤1小时", play_l1:"WHO", play_d1:"2–4 岁屏幕上限；“带回玩乐”。",
+    play_n2:"8小时39分", play_l2:"美国青少年", play_d2:"每日平均休闲屏幕时间（Common Sense 2023）。",
+    play_n3:"−0.16", play_l3:"SMD", play_d3:"21 项 RCT 的屏幕时间降幅；≥7 个月持续。",
+    play_n4:"I-SOCIALISE", play_l4:"RCT", play_d4:"250 名自闭症儿童；积木疗法提升社交技能。",
+    play_c1_t:"天生离屏", play_c1_d:"LEGO® 砌叠才是介入；屏幕只在之后的 60 秒打卡。没有开镜头监控，没有无尽信息流。",
+    play_c2_t:"持证引导", play_c2_d:"我们的创办人是 LEGO® Serious Play® 认证引导师（Strategic Play® Global／全球联会 Master-Trainer 途径）——引导主导、有实证基础、可信。",
+    play_c3_t:"对应 CASEL 5", play_c3_d:"每次建构对应一项 CASEL 能力（自我觉察 → 负责任决策），所以玩乐是可量度的 SEL，不止好玩。",
+    play_src:"资料来源：WHO 2019 屏幕指引；Common Sense Media 2023；SCREENS RCT（JAMA Network Open）；I-SOCIALISE 群集 RCT（Wright 等 2023）；LEGO Foundation Whitebread 等 2017；LEGO Build Big Feelings 2026。",
+    hero_title:"EmoPlay · EmoCare",
+    hero_sub:"AI + SEL 儿童及青少年心理健康平台（4–18 岁）",
+    hero_lead:"在危机升级前，为每个孩子提供客观、早期、隐私优先的情绪信号。为广州、香港及杭州而建：先攻 B2B 学校及大学，再拓展 B2C 家庭。提供英文、繁体中文及简体中文三语版本。",
+    hero_cta1:"探索实时工具 ↓", hero_cta2:"开启实时示范 ↗",
+    hero_pill1:"参赛主体：广东丞锋人工智能有限公司（广州南沙）", hero_pill2:"BeeVerse Hong Kong · 成立于 2025 年 8 月",
+    crisis_kicker:"危机", crisis_title:"儿童心理健康是一颗定时炸弹",
+    crisis_lead:"每拖延一年，就是一代本可避免的苦难。SEN 及高风险儿童往往要等到危机爆发后才被识别；学校难以扩展支援（约 1 名社工 : 500+ 学生）；家庭与学校的数据闭环是断裂的。",
+    c_china_l:"中国高中", c_china_d:"抑郁检出率（2023 蓝皮书）；初中 30%、小学 10%",
+    c_hk_l:"香港", c_hk_d:"中学生中度至严重抑郁；2024 年焦虑 20.5%",
+    c_sen_l:"香港 SEN", c_sen_d:"学生（10.7%）；主流学校 67,870 人（12.6%）",
+    c_silent_l:"沉默", c_silent_d:"香港青少年不会主动求助；仅 28.5% 愿向成人倾诉（YMCA 2024）",
+    crisis_note:"资料来源：香港浸信会爱群 2024 关顾调查（n=1,646）；YMCA 2024；EDB 2024/25；中国心理健康蓝皮书 2023。",
+    method_kicker:"问题 → 我们的方法", method_title:"三个缺口，一个闭环。",
+    method_lead:"针对每个痛点，EmoPlay 遵循一套简单且可防守的方法：收窄信号 → 早期侦测 → 在黄金窗口内解决。",
+    narrow:"收窄", detect:"侦测", solve:"解决",
+    p1_t:"1 · 看不见的情绪", p1_d:"老师与家长缺乏实时、客观的情绪信号。等到孩子被标记时，危机早已升级。",
+    p1_n:"每日 60 秒打卡 + 25 个 FACS 游戏，标记首个偏差。", p1_dt:"2,082 词 NLP 对比年龄常模基线评估风险。", p1_s:"儿童专属保险库 + CASEL 雷达，提前警示家长／老师。",
+    p2_t:"2 · SEL 不足 + 不安全 AI", p2_d:"一名辅导员无法覆盖 500+ 学生。通用 AI 聊天机器人没有 CASEL 框架、没有升级机制——就是不安全的「树洞」。",
+    p2_n:"游戏化 CASEL 5×17 + LEGO® Serious Play® 触及每个孩子。", p2_dt:"设有严格防护栏的安全 AI「Bee」标记风险，绝不鼓励伤害。", p2_s:"老师热力图 + 人工升级——人始终在环内。",
+    p3_t:"3 · 家庭—学校闭环断裂", p3_d:"家长在家看到发脾气，老师在课室看到退缩，临床医生数月后才看到危机。黄金窗口年年错过。",
+    p3_n:"一个儿童拥有的保险库，分享 30 天曲线 + CASEL 雷达。", p3_dt:"家庭与学校读取同一早期信号。", p3_s:"双方在同一故事上行动，嵌入广州「筛查—警示—介入」闭环。",
+    product_kicker:"我们的产品 · 实时平台", product_title:"EmoPlay 工具——实际可用，非空中楼阁",
+    product_lead:"466 KB 零依赖 SPA，边缘部署、可离线运行。试试下方的互动示范（可随时切换语言）。",
+    t1_t:"心情打卡", t1_d:"每日 60 秒情绪信号——感觉像游戏而非测验。点选你的感受；引擎在设备上私密编码。",
+    t2_t:"25-FACS 微表情画廊", t2_d:"客观面部情绪编码——孩子「感受什么」，通过趣味的镜头游戏教学。以下为编码集合示例：",
+    t3_t:"家长仪表板", t3_d:"单屏每日信号——平静／留意／警示，绝非临床标签。30/90 天趋势曲线；附本地热线的升级路径。",
+    t3_cap:"来自儿童成长保险库的 CASEL 5×17 雷达。",
+    t4_t:"课堂热力图", t4_d:"一目了然的群体筛查——本周哪些班级需要关注。对应广州「筛查 → 警示 → 介入」闭环。",
+    heat_legend:"绿色 = 平静 · 琥珀 = 留意 · 红色 = 警示（自动标记）",
+    mood_hint:"点选表情符号记录今日打卡。",
+    rl_self:"自我觉察", rl_social:"社交", rl_rel:"人际", rl_dec:"决策", rl_manage:"管理",
+    facs:[["😊","快乐"],["😢","悲伤"],["😠","愤怒"],["😨","恐惧"],["😲","惊讶"],["🤢","厌恶"],["🙄","轻蔑"],["😳","尴尬"],["😔","痛苦"],["🤔","沉思"],["😌","满足"],["😴","疲倦"]],
+    mood_resp:["很棒——保持连续记录！","愉快的一天","中性","有点低落——试试 2 分钟打卡","难过——我们建议一个舒缓活动","生气——已排队呼吸练习"],
+    engine_kicker:"技术 · 引擎", engine_title:"五套有实证基础的框架，一个设备端引擎",
+    engine_lead:"EmoPlay 的情绪引擎融合四个有科学基础的信号来源，然后完全在设备端运行——原始生物特征视频绝不离开孩子的手机或学校边缘网关。",
+    e_facs:"25 FACS", e_facs_d:"客观面部微表情编码",
+    e_nlp:"2,082 词 NLP", e_nlp_d:"多语言情绪分析（粤语／普通话／英语）",
+    e_casel:"CASEL 5×17", e_casel_d:"我们教授并量度的 SEL 技能框架",
+    e_pank:"Panksepp 7", e_pank_d:"情感神经科学的参与与奖励基础",
+    e_arrow:"▼  融合  ▼",
+    e_core_t:"设备端边缘推理 · 466 KB · 低于 200 毫秒延迟",
+    e_core_d:"融合后的信号会对比年龄常模情绪成长曲线（4–22 岁），并导向合适的下一个年龄活动。公开研究指 RAF-DB／DEAP 类数据集上情绪分类准确率约 85–88%，边缘推理延迟低于 200 毫秒——隐私与即时性本就内置，而非事后加装。",
+    e_demo_t:"试试 NLP 迷你引擎：", e_demo_d:"输入一句话，示范会为其情绪信号评分（仅作示范，非临床用途）。",
+    e_ph:"例如：我很累，没有人理解我", e_run:"执行示范",
+    priv_kicker:"隐私与安全 · 合规", priv_title:"一个安全的「树洞」，由设计开始",
+    priv_lead:"通用伴侣 AI 已造成真实伤害（Character.AI 及 ChatGPT 未成年死亡个案；中国 2025 年 8 月禁止伴侣 AI 情感依赖）。EmoPlay 的设计方向完全相反。",
+    pr1_t:"隐私优先设计", pr1_d:"设备端／边缘推理——不储存原始面部视频或语音。符合 PIPL（中国）、COPPA 及 GDPR-K（未成年人）：数据最小化、可验证家长同意、删除权。",
+    pr2_t:"安全的 AI「Bee」", pr2_d:"严格防护栏：不给医疗建议、不鼓励伤害、不造成情感依赖。孩子总会听到「也有大人在」。",
+    pr3_t:"人类在环", pr3_d:"自动标记的风险会转介给家长、老师或城市热线——绝不交由自主聊天机器人决定。AI 是辅助，而非取代成人。",
+    pr4_t:"无黑暗模式", pr4_d:"无行为广告、无操控循环、无第三方追踪。参与来自玩乐与成长，而非胁迫。",
+    tech_kicker:"技术", tech_title:"科学技术堆栈",
+    tf1_t:"25 FACS 微表情", tf1_d:"客观面部情绪编码——孩子「感受什么」。",
+    tf2_t:"2,082 词 NLP 词典", tf2_d:"多语言情绪分析——粤语 + 普通话 + 英语。",
+    tf3_t:"CASEL 5×17", tf3_d:"我们教授并量度的 SEL 技能框架（5 项能力 × 17 项子技能）。",
+    tf4_t:"Panksepp 7 系统", tf4_d:"情感神经科学的参与与奖励基础。",
+    tf5_t:"LEGO® Serious Play®", tf5_d:"反思式引导——持证 Strategic Play Global 引导师。",
+    tf6_t:"长期常模", tf6_d:"4–22 岁情绪成长曲线——不断增值的数据护城河。",
+    company_kicker:"公司与集团", company_title:"广州实体 × 香港网络",
+    company_lead:"全国首部相关法例创造了市场；工具由我们拥有。集团架构为跨境大湾区执行而设。",
+    ent1_t:"广东丞锋人工智能有限公司", ent1_d:"营运实体 · 广州南沙。注册以把握大湾区政策支援、南沙实体优惠，以及 3,806 间学校／293 万名学生的强制买家。",
+    ent2_t:"BeeVerse Hong Kong", ent2_d:"成立于 2025 年 8 月——控股与业务拓展。创办人关智豪（Kwan Chi Ho, Jonathan）拥有 20+ 年营运卓越经验，横跨 Sun Life、Chubb 及 HSBC。",
+    crit_kicker:"竞赛契合 · 评分准则", crit_title:"对应评委的计分方式",
+    crit_lead:"2026 广州科技创新创业大赛（全球赛）／港科大百万奖金创业大赛（广州）按五个维度计分。EmoPlay 正是为占总分 50% 的两项而建。",
+    cw1_t:"技术与产品 · 25%", cw1_a:"边缘引擎、5 套科学框架、实时产品、长期数据资产。",
+    cw2_t:"产业化（广州）· 25%", cw2_a:"南沙实体 + 全国首部法例 = 3,806 间学校的强制、专属买家。",
+    cw3_t:"行业与市场 · 20%", cw3_a:"SEL 市场 CAGR 27.2%（3.25 亿 → 22.2 亿美元）；社会价值 + 商业上行。",
+    cw4_t:"团队 · 15%", cw4_a:"营运主导（49 亿港元 eMPF）、Chubb／Bowtie／Sun Life 网络、临床及 AI 顾问。",
+    cw5_t:"财务分析 · 15%", cw5_a:"第 5 年广州+香港 1.55 亿港元；ROE 约 97.6%；保险交叉销售为对手无法复制的收入线。",
+    cw6_t:"奖金门槛 · 广州注册", cw6_a:"非广州企业须注册本地实体方可领奖——我们已有广东丞锋。",
+    cta_title:"即时看看 EmoPlay", cta_lead:"上方平台已部署并实际运作——在任何设备开启。如看过旧版本，请清除浏览器缓存（Ctrl/Cmd+Shift+R）以载入新三语版本。",
+    cta_github:"GitHub Pages 示范 ↗", cta_vercel:"Vercel 示范 ↗",
+    gallery_kicker:"产品示范截图", gallery_title:"EmoPlay 实际运作的样子",
+    gallery_lead:"真实产品 UI 模拟图（截图），展示平台如何收窄、侦测并解决每个痛点。",
+    g1_t:"儿童／青少年 App", g1_d:"每日打卡、25 个 FACS 游戏、安全 AI 伴侣「Bee」",
+    g2_t:"家长仪表板", g2_d:"平静／留意／警示信号、30 天趋势、CASEL 雷达",
+    g3_t:"老师／学校热力图", g3_d:"群体筛查、自动标记、广州筛查→警示→介入",
+    g4_t:"实时平台网站", g4_d:"开放产品页，含互动工具与广州数据",
+    foot_comp:"参赛：2026 广州科技创新创业大赛（全球赛）· 香港科技大学百万奖金创业大赛（广州）",
+    foot_src:"资料来源：香港浸信会爱群 2024；YMCA 2024；EDB 2024/25；中国心理健康蓝皮书 2023；广州市中小学生心理健康促进条例（2024-11-01 生效）。引擎准确率来自公开 RAF-DB／DEAP 类文献（85–88%）。财务数据为前瞻性预测。"
+  }
+};
+
+/* ============ apply language ============ */
+let CUR = localStorage.getItem('emo_lang') || 'en';
+function applyLang(lang){
+  CUR = lang;
+  document.documentElement.lang = (lang==='en'?'en':(lang==='zhHant'?'zh-Hant':'zh-Hans'));
+  localStorage.setItem('emo_lang', lang);
+  const D = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    if(D[k]!==undefined) el.innerHTML = D[k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const k = el.getAttribute('data-i18n-ph');
+    if(D[k]!==undefined) el.setAttribute('placeholder', D[k]);
+  });
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on', b.getAttribute('data-lang')===lang));
+  buildFaces();
+  buildHeat();
+}
+document.querySelectorAll('.lang button').forEach(b=>{
+  b.addEventListener('click', ()=>applyLang(b.getAttribute('data-lang')));
+});
+
+/* ============ interactive demos ============ */
+function pickMood(el){
+  document.querySelectorAll('#mood span').forEach(s=>s.classList.remove('on'));
+  el.classList.add('on');
+  const D = I18N[CUR];
+  const idx = parseInt(el.getAttribute('data-m'));
+  document.getElementById('moodout').textContent = D.mood_resp[idx] || 'Logged.';
+}
+document.querySelectorAll('#mood span').forEach(s=>s.addEventListener('click', ()=>pickMood(s)));
+
+function buildFaces(){
+  const box = document.getElementById('faces');
+  if(!box) return;
+  const D = I18N[CUR];
+  box.innerHTML='';
+  (D.facs||[]).forEach(([emo,label])=>{
+    const d=document.createElement('div');
+    d.innerHTML='<b>'+emo+'</b>'+label;
+    box.appendChild(d);
+  });
+}
+function buildHeat(){
+  const heat=document.getElementById('heat');
+  if(!heat) return;
+  const cols=['#4C9B6D','#E0A800','#C84642'];
+  heat.innerHTML='';
+  for(let i=0;i<24;i++){
+    const r=Math.random();
+    const c = r>0.8?2 : r>0.55?1:0;
+    const i2=document.createElement('i');
+    i2.style.background=cols[c];
+    heat.appendChild(i2);
+  }
+}
+
+/* ============ NLP mini-engine (illustrative) ============ */
+const NEG = ["tired","sad","lonely","nobody","hate","cry","worthless","anxious","scared","understand","fail","empty","hopeless","alone","afraid","累","孤","討厭","討厌","哭","沒人","没人","焦慮","焦虑","害怕","空","絕望","绝望","理解","崩潰","崩溃"];
+const POS = ["happy","good","calm","great","friend","love","excited","hope","fun","平静","開心","开心","好","愛","爱","希望","有趣","朋友"];
+document.getElementById('engineRun').addEventListener('click', ()=>{
+  const D = I18N[CUR];
+  const txt = (document.getElementById('engineInput').value||'').toLowerCase();
+  let neg=0, pos=0;
+  NEG.forEach(w=>{ if(txt.includes(w)) neg++; });
+  POS.forEach(w=>{ if(txt.includes(w)) pos++; });
+  const score = Math.max(0, Math.min(100, 50 + pos*12 - neg*22));
+  let band, col;
+  if(score>=66){band=(CUR==='en'?'CALM':(CUR==='zhHant'?'平靜':'平静'));col='#4C9B6D';}
+  else if(score>=40){band=(CUR==='en'?'WATCH':(CUR==='zhHant'?'留意':'留意'));col='#E0A800';}
+  else {band=(CUR==='en'?'ALERT':(CUR==='zhHant'?'警示':'警示'));col='#C84642';}
+  const r=document.getElementById('engineResult');
+  r.style.display='block';
+  r.style.background=col; r.style.color='#fff';
+  r.innerHTML = '<b>'+(CUR==='en'?'Signal: ':(CUR==='zhHant'?'訊號：':'信号：'))+band+'</b> · '+
+    (CUR==='en'?'illustrative score':(CUR==='zhHant'?'示範評分':'示范评分'))+' '+score+'/100'+
+    '<br><span style="font-size:12px;opacity:.95">'+
+    (CUR==='en'?'This is a front-end demo of the 2,082-term NLP signal — not a clinical assessment. In production the score feeds the child vault and parent/teacher alert.':
+     (CUR==='zhHant'?'這是 2,082 詞 NLP 訊號的前端示範——非臨床評估。實際運作時，分數會輸入兒童保險庫及家長／老師警示。':'这是 2,082 词 NLP 信号的前端示范——非临床评估。实际运作时，分数会输入儿童保险库及家长／老师警示。'))+
+    '</span>';
+});
+
+applyLang(CUR);
+</script>
+</body>
+</html>
